@@ -1,0 +1,35 @@
+.header__container {
+    display: flex;
+    padding: 32px 40px 28px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    align-items: center;
+}
+
+.header__logo {
+    margin-right: 24px;
+}
+
+.header__location-data {
+    margin-right: auto;
+}
+
+.header__add-clothes-btn {
+    margin-right: 20px;
+    border: 0;
+    background-color: transparent;
+}
+
+.header__add-clothes-btn:hover {
+    cursor: pointer;
+}
+
+.header__user-name {
+    margin-right: 12px;
+}
+
+.header__user-icon {
+    height: 40px;
+    width: 40px;
+}
