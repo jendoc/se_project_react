@@ -1,0 +1,28 @@
+.weathercard {
+    height: 80px;
+    width: 70vw;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'CabinetGrotesk-Bold', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.weathercard__background_day {
+    background-color: #00A3FF;
+}
+
+.weathercard__background_night {
+    background-color: #286897;
+}
+
+.weathercard__temp {
+    padding: 0;
+    align-self: center;
+    margin-left: 16px;
+}

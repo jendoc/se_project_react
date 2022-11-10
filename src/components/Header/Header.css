@@ -1,10 +1,13 @@
 .header__container {
     display: flex;
     padding: 32px 40px 28px 40px;
+    font-family: 'CabinetGrotesk-Regular', sans-serif;
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
+    max-width: 1360px;
     align-items: center;
+    margin: auto;
 }
 
 .header__logo {

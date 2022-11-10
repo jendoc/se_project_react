@@ -1,4 +1,7 @@
 .App {
   margin: auto;
   background-color: #F3F3F3;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }

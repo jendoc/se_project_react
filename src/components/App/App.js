@@ -5,25 +5,27 @@ import {
   filterDataFromWeatherAPI,
 } from "../utils/weatherApi";
 import Header from "../Header/Header";
+import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const App = () => {
-  // const [weatherData, setWeatherData] = React.useState({});
+  const [weatherData, setWeatherData] = React.useState({});
 
-  // React.useEffect(() => {
-  //   if (location.latitude && location.longitude) {
-  //     getForecastWeather(location, APIKey)
-  //       .then((data) => {
-  //         setWeatherData(filterDataFromWeatherAPI(data));
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (location.latitude && location.longitude) {
+      getForecastWeather(location, APIKey)
+        .then((data) => {
+          setWeatherData(filterDataFromWeatherAPI(data));
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
 
   return (
     <div className="App">
-      <Header />
+      <Header weatherData={weatherData} />
+      <Main weatherData={weatherData}/>
       <Footer />
     </div>
   );

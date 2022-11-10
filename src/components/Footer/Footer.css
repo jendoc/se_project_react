@@ -2,6 +2,11 @@
     display: flex;
     padding: 0px 40px 24px 40px;
     justify-content: space-between;
+    font-family: 'CabinetGrotesk-Regular', sans-serif;
     font-weight: 500;
     font-size: 16px;
+    max-width: 1360px;
+    position: sticky;
+    flex-shrink: 0;
+    margin: auto;
 }
