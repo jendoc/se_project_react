@@ -3,7 +3,6 @@ import "./ItemCard.css";
 function ItemCard({ clothingOption, handleCardClick }) {
 
   const handleClick = (evt) => {
-    console.log(clothingOption)
     evt.preventDefault();
     handleCardClick(clothingOption)
   }

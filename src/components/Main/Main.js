@@ -7,9 +7,9 @@ function Main({ weatherData, defaultClothing, handleCardClick }) {
   const weatherType = () => {
     if (currentWeather >= 86) {
       return "hot";
-    } else if (currentWeather >= 66 && currentWeather <= 85) {
+    } else if (currentWeather >= 65 && currentWeather <= 85) {
       return "warm";
-    } else if (currentWeather <= 65) {
+    } else if (currentWeather <= 64) {
       return "cold"
     }
   }
@@ -36,7 +36,6 @@ function Main({ weatherData, defaultClothing, handleCardClick }) {
         {clothingOptions.map((item) => {
           return(
             <ItemCard
-            isOpen="false"
             clothingOption={item}
             key={item._id}
             name={item.name}

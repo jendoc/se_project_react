@@ -12,11 +12,15 @@
   overflow: hidden;
 }
 
-.weathercard__background_day {
+.weathercard__background_day_clear {
   background-color: #00a3ff;
 }
 
-.weathercard__background_night {
+.weathercard__background_day_precip {
+  background-color: #6CA6C7;
+}
+
+.weathercard__background_night_clear, .weathercard__background_night_precip {
   background-color: #286897;
 }
 

@@ -36,6 +36,8 @@ const App = () => {
     setActiveModal("item");
   };
 
+  console.log(activeModal)
+
   return (
     <>
       <div className="App">
@@ -51,13 +53,14 @@ const App = () => {
           handleCardClick={handleCardClick}
         />
         <Footer />
-      </div>
-      <ItemModal
+        <ItemModal
         isOpen={activeModal === "item"}
         type={"item"}
         card={selectedCard}
         onClose={closeModal}
       />
+      </div>
+      
     </>
   );
 };
