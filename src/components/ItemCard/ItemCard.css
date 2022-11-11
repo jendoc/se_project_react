@@ -1,26 +1,30 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    height: 328px;
-    width: 328px;
+  display: flex;
+  flex-direction: column;
+  height: 328px;
+  width: 328px;
 }
 
 .card__title {
-    font-family: 'CabinetGrotesk-Regular', sans-serif;
-    font-weight: 700;
-    line-height: 20px;
-    font-size: 16px;
-    color: #00000099;
-    padding: 2px 12px;
-    border-radius: 4px;
-    background-color: #fff;
-    align-self: center;
-    margin-top: 16px;
-    z-index: 1;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
+  font-weight: 700;
+  line-height: 20px;
+  font-size: 16px;
+  color: #00000099;
+  padding: 2px 12px;
+  border-radius: 4px;
+  background-color: #fff;
+  align-self: center;
+  margin-top: 16px;
+  z-index: 1;
 }
 
 .card__image {
-    z-index: 0;
-    margin-top: -65px;
-    border-radius: 16px;
+  z-index: 0;
+  margin-top: -65px;
+  border-radius: 16px;
+}
+
+.card:hover {
+  cursor: pointer;
 }

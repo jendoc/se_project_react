@@ -1,0 +1,15 @@
+.modal__wrapper {
+  background-color: #0000004d;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.modal__body {
+  width: 496px;
+  height: 436px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin: auto;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
+}

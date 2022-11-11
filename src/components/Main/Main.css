@@ -1,17 +1,18 @@
 .main {
-    font-family: 'CabinetGrotesk-Regular', sans-serif;
-    max-width: 1360px;
-    margin: auto;
-    flex: 1;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
+  width: 95vw;
+  max-width: 1360px;
+  margin: auto;
+  flex: 1;
 }
 
 .main__gallery {
-    margin-top: 34px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 0;
-    column-gap: 15px;
-    row-gap: 20px;
-    flex-wrap: wrap;
+  margin-top: 34px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0;
+  column-gap: 15px;
+  row-gap: 20px;
+  flex-wrap: wrap;
 }

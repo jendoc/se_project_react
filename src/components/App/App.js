@@ -6,6 +6,7 @@ import {
 } from "../utils/weatherApi";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import Footer from "../Footer/Footer";
 import React, { useState } from "react";
 
@@ -25,7 +26,8 @@ const App = () => {
   return (
     <div className="App">
       <Header weatherData={weatherData} />
-      <Main weatherData={weatherData}/>
+      <Main weatherData={weatherData} />
+      <ModalWithForm />
       <Footer />
     </div>
   );

@@ -1,17 +1,15 @@
-import './ItemCard.css';
-import imgPath from '../images/docs.jpg';
+import "./ItemCard.css";
+import imgPath from "../images/docs.jpg";
 
 function ItemCard() {
-    return(
-        <>
-        <div className="card">
+  return (
+    <>
+      <template className="card">
         <h5 className="card__title">Boots</h5>
-            <img className="card__image" 
-            src={imgPath}
-            />
-        </div>
-        </>
-    )
+        <img className="card__image" src={imgPath} />
+      </template>
+    </>
+  );
 }
 
-export default ItemCard
+export default ItemCard;
