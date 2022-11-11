@@ -1,0 +1,58 @@
+.modal__wrapper_item {
+    background-color: #0000004d;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+  }
+  
+  .modal__opened {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .modal__body {
+    width: 498px;
+    height: 610px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    border-radius: 20px;
+    margin: auto;
+    font-family: "CabinetGrotesk-Bold", sans-serif;
+    position: fixed;
+  }
+  
+  .modal__close-btn {
+    position: absolute;
+    top: 22px;
+    right: 30px;
+    background-image: url(../images/close-btn.svg);
+    background-color: transparent;
+    border: none;
+    height: 16px;
+    width: 16px;
+    z-index: 3;
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg) brightness(103%) contrast(101%);
+  }
+  
+  .modal__close-btn:hover {
+    cursor: pointer;
+  }
+
+  .modal__item-image {
+    width: 498px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .modal__item-name, .modal__item-weather {
+    margin-left: 32px;
+  }

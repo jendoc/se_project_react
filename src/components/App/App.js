@@ -7,8 +7,10 @@ import {
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import React, { useState } from "react";
+import ItemCard from "../ItemCard/ItemCard";
 
 const App = () => {
   const [weatherData, setWeatherData] = React.useState({});
@@ -27,7 +29,7 @@ const App = () => {
     <div className="App">
       <Header weatherData={weatherData} />
       <Main weatherData={weatherData} />
-      <ModalWithForm />
+      <ItemModal />
       <Footer />
     </div>
   );

@@ -11,7 +11,9 @@ function Main({ weatherData, cards, onCardClick }) {
         Today is {Math.round(weatherData.temperature)}&deg;F / You may want to
         wear:
       </h3>
-      <ul className="main__gallery"></ul>
+      <ul className="main__gallery">
+        <ItemCard />
+      </ul>
     </main>
   );
 }
