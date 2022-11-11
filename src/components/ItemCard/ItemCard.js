@@ -1,13 +1,19 @@
 import "./ItemCard.css";
-import imgPath from "../images/docs.jpg";
 
-function ItemCard() {
+function ItemCard({ clothingOption, handleCardClick }) {
+
+  const handleClick = (evt) => {
+    console.log(clothingOption)
+    evt.preventDefault();
+    handleCardClick(clothingOption)
+  }
+
   return (
     <>
-      <template className="card">
-        <h5 className="card__title">Boots</h5>
-        <img className="card__image" src={imgPath} />
-      </template>
+      <li className="card" onClick={handleClick}>
+        <h5 className="card__title">{clothingOption.name}</h5>
+        <img className="card__image" src={clothingOption.link} alt={clothingOption.name}/>
+      </li>
     </>
   );
 }

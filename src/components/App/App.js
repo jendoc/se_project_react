@@ -1,19 +1,21 @@
+
+import React, { useState } from "react";
 import "./App.css";
-import { location, APIKey } from "../utils/constants";
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
+import { location, APIKey, defaultClothingItems } from "../utils/constants";
 import {
   getForecastWeather,
   filterDataFromWeatherAPI,
 } from "../utils/weatherApi";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import ItemModal from "../ItemModal/ItemModal";
-import Footer from "../Footer/Footer";
-import React, { useState } from "react";
-import ItemCard from "../ItemCard/ItemCard";
 
 const App = () => {
-  const [weatherData, setWeatherData] = React.useState({});
+  const [weatherData, setWeatherData] = useState({});
+  const [selectedCard, setSelectedCard] = useState("");
+  const [activeModal, setActiveModal] = useState({});
 
   React.useEffect(() => {
     if (location.latitude && location.longitude) {
@@ -25,13 +27,38 @@ const App = () => {
     }
   }, []);
 
+  const closeModal = () => {
+    setActiveModal(false);
+  };
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    setActiveModal("item");
+  };
+
   return (
-    <div className="App">
-      <Header weatherData={weatherData} />
-      <Main weatherData={weatherData} />
-      <ItemModal />
-      <Footer />
-    </div>
+    <>
+      <div className="App">
+        <Header
+          weatherData={weatherData}
+          openModal={() => {
+            setActiveModal("add");
+          }}
+        />
+        <Main
+          weatherData={weatherData}
+          defaultClothing={defaultClothingItems}
+          handleCardClick={handleCardClick}
+        />
+        <Footer />
+      </div>
+      <ItemModal
+        isOpen={activeModal === "item"}
+        type={"item"}
+        card={selectedCard}
+        onClose={closeModal}
+      />
+    </>
   );
 };
 
