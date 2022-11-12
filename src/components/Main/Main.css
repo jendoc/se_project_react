@@ -16,3 +16,9 @@
   row-gap: 20px;
   flex-wrap: wrap;
 }
+
+@media screen and (max-width: 1430px) {
+  .main__gallery {
+    justify-content: space-around;
+  }
+}

@@ -17,10 +17,11 @@
 }
 
 .weathercard__background_day_precip {
-  background-color: #6CA6C7;
+  background-color: #6ca6c7;
 }
 
-.weathercard__background_night_clear, .weathercard__background_night_precip {
+.weathercard__background_night_clear,
+.weathercard__background_night_precip {
   background-color: #286897;
 }
 
@@ -28,4 +29,13 @@
   padding: 0;
   align-self: center;
   margin-left: 16px;
+}
+
+@media screen and (max-width: 475px) {
+  .weathercard {
+    font-size: 30px;
+  }
+  .weathercard__temp {
+    margin-left: 10px;
+  }
 }

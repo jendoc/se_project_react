@@ -1,4 +1,4 @@
-.modal_type_item {
+.item-modal {
   background-color: #0000004d;
   position: fixed;
   height: 100vh;
@@ -6,15 +6,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
   z-index: 2;
 }
 
-.item-modal__opened {
-  visibility: visible;
-  opacity: 1;
+.item-modal:hover {
+  cursor: pointer;
+}
+
+.item-modal_closed {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .item-modal__body {
@@ -30,6 +34,10 @@
   position: fixed;
 }
 
+.item-modal__body:hover {
+  cursor: default;
+}
+
 .item-modal__close-btn {
   position: absolute;
   top: 22px;
@@ -40,8 +48,9 @@
   height: 16px;
   width: 16px;
   z-index: 3;
-  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg)
-    brightness(103%) contrast(101%);
+  /* filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg)
+    brightness(103%) contrast(101%); */
+    /* With default item cards, white visibility is an issue*/
 }
 
 .item-modal__close-btn:hover {

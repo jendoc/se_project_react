@@ -1,21 +1,24 @@
-.modal_type_form {
+.modal {
   background-color: #0000004d;
-  position: absolute;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   display: flex;
-  position: fixed;
   justify-content: center;
   align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s ease-in-out;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
   z-index: 2;
 }
 
-.modal__opened {
-  visibility: visible;
-  opacity: 1;
+.modal:hover {
+  cursor: pointer;
+}
+
+.modal_closed {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .modal__body {
@@ -28,15 +31,13 @@
   border-radius: 20px;
   margin: auto;
   font-family: "CabinetGrotesk-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
   position: fixed;
 }
 
-.modal__form {
-  margin: 28px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-  justify-content: space-between;
+.modal__body:hover {
+  cursor: default;
 }
 
 .modal__close-btn {
@@ -50,18 +51,57 @@
   width: 16px;
 }
 
+.modal__form {
+  margin: 0px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .modal__close-btn:hover {
   cursor: pointer;
   opacity: 0.5;
 }
 
-.modal__title {
-  margin: 0;
+.form__title {
+  margin-top: 28px;
+  margin-left: 28px;
+  margin-bottom: 0px;
 }
 
-.modal__form-input_text {
+.form__label {
+  margin-top: 24px;
+  margin-bottom: 4px;
+}
+
+.form__label_radio {
+  margin-left: 8px;
+  opacity: 50%;
+}
+
+.form__input {
+  padding: 5px;
   border: none;
   border-bottom: #000 solid 1px;
+}
+
+.form__radio {
+  margin: 8px 0px;
+}
+
+.form__input_radio {
+  accent-color: #000;
+  opacity: 50%;
+}
+
+.form__input_radio:hover {
+  cursor: pointer;
+}
+
+.form__input_radio:checked,
+.form__input_radio:checked + label {
+  accent-color: #000;
+  opacity: 100%;
 }
 
 .modal__form-submit-btn {
@@ -72,6 +112,7 @@
   height: 36px;
   width: 124px;
   transition: 0.2s ease-in-out;
+  margin-top: 32px;
 }
 
 .modal__form-submit-btn:hover:not(:disabled) {

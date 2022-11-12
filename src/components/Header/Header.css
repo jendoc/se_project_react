@@ -1,38 +1,110 @@
 .header__container {
-    display: flex;
-    padding: 32px 40px 28px 40px;
-    font-family: 'CabinetGrotesk-Regular', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    max-width: 1360px;
-    align-items: center;
-    margin: auto;
+  display: flex;
+  padding: 32px 40px 28px 40px;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  max-width: 1360px;
+  align-items: center;
+  margin: auto;
 }
 
 .header__logo {
-    margin-right: 24px;
+  margin-right: 24px;
+  grid-area: a;
 }
 
 .header__location-data {
-    margin-right: auto;
+  margin-right: auto;
+  grid-area: b;
 }
 
 .header__add-clothes-btn {
-    margin-right: 20px;
-    border: 0;
-    background-color: transparent;
+  margin-right: 20px;
+  border: 0;
+  background-color: transparent;
+  grid-area: c;
 }
 
 .header__add-clothes-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .header__user-name {
-    margin-right: 12px;
+  margin-right: 12px;
+  grid-area: d;
 }
 
 .header__user-icon {
-    height: 40px;
-    width: 40px;
+  height: 40px;
+  width: 40px;
+  grid-area: e;
+}
+
+@media screen and (min-width: 707px) and (max-width: 900px) {
+  .header__container {
+    font-size: 15px;
+    padding: 20px;
+  }
+}
+
+@media screen and (min-width: 475px) and (max-width: 707px) { 
+    .header__container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: 
+        "a a b b b"
+        "c c d d e"
+        ;
+        padding: 20px;
+    }
+    .header__location-data {
+        margin-right: 0;
+    }
+    .header__user-name {
+        margin-right: 0;
+        margin-left: auto;
+    }
+    .header__logo {
+        margin-right: 0;
+    }
+    .header__add-clothes-btn {
+        margin-right: 0;
+    }
+    .header__user-icon {
+        padding-left: 10px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .header__container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "a b"
+        "e e"
+        "d d"
+        "c c"
+        ;
+        padding: 20px;
+    }
+    .header__location-data {
+        font-size: 20px;
+        padding-left: auto;
+    }
+    .header__user-name {
+        font-size: 20px;
+        margin: auto;
+    }
+    .header__user-icon {
+        margin: auto;
+        padding-bottom: 5px;
+    }
+    .header__add-clothes-btn {
+        margin: 15px;
+    }
+    .header__logo {
+        margin-right: 0;
+    }
 }

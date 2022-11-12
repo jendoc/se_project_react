@@ -4,12 +4,12 @@ function ItemModal({ isOpen, name, card, onClose}) {
 
   return (
     <>
-      <div className={isOpen ? `"modal_type_${name} item-modal__opened"` : `"modal_type_${name}"`}>
+      <div className={isOpen ? `item-modal modal_name_${name}` : `modal_name_${name} item-modal_closed`}>
         <div className="item-modal__body">
           <button className="item-modal__close-btn" onClick={onClose}></button>
           <img className="item-modal__image"
           src={card.link}
-          alt={card.name}
+          alt={`${card.name}`}
           />
           <h3 className="item-modal__name">{card.name}</h3>
           <h3 className="item-modal__weather">Weather: {card.weather}</h3>
