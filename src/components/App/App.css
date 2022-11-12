@@ -4,4 +4,6 @@
   min-height: 100vh;
   flex-direction: column;
   background-color: #F3F3F3;
+  font-family: CabinetGrotesk-Bold, CabinetGrotesk-Regular,
+  Arial, Helvetica, sans-serif;
 }

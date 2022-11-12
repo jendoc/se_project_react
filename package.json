@@ -38,8 +38,8 @@
     ]
   },
   "devDependencies": {
+    "css-loader": "^6.7.1",
     "gh-pages": "^4.0.0"
   },
-  "homepage": 
-    "https://jendoc.github.io/se_project_react"
+  "homepage": "https://jendoc.github.io/se_project_react"
 }
