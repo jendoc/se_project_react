@@ -1,4 +1,4 @@
-import "./ModalWithForm.css";
+import "../../blocks/ModalWithForm/ModalWithForm.css";
 
 function ModalWithForm({ isOpen, type, title, buttonText, onClose, children }) {
 
@@ -16,7 +16,7 @@ function ModalWithForm({ isOpen, type, title, buttonText, onClose, children }) {
             className="modal__close-btn"
             onClick={onClose}
             type="button"
-          ></button>
+          />
           <h3 className="form__title">{title}</h3>
           <form className="modal__form" type={type}>
             {children}

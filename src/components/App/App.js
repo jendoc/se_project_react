@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import "../../blocks/App/App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -13,10 +13,10 @@ import {
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
-  const [selectedCard, setSelectedCard] = useState("");
-  const [activeModal, setActiveModal] = useState({});
+  const [selectedCard, setSelectedCard] = useState({});
+  const [activeModal, setActiveModal] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (location.latitude && location.longitude) {
       getForecastWeather(location, APIKey)
         .then((data) => {
@@ -26,7 +26,7 @@ const App = () => {
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleEscape(evt) {
       if (evt.code === "Escape") {
         closeModal();
@@ -36,7 +36,7 @@ const App = () => {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleOverlay(evt) {
       if (evt.target.classList.contains("modal") || evt.target.classList.contains("item-modal")) {
         closeModal();

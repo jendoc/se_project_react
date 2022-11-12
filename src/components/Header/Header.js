@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import "../../blocks/Header/Header.css";
 import logoPath from "../../images/wtwr.svg";
 import iconPath from "../../images/Avatar.svg";
 
