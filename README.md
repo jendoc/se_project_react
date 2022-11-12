@@ -1,8 +1,8 @@
 # WTWR (What to Wear?)
 
-![Desktop screenshot](./src/images/WTWR_desktop.png)
-
 Simple weather app created with React to help users decide what to wear based on the current weather.
+
+![Desktop screenshot](./src/images/WTWR_desktop.png)
 
 ## Description
 
