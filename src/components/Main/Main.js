@@ -3,17 +3,17 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, defaultClothing, handleCardClick }) {
-  let currentWeather = weatherData.temperature;
+  const currentWeather = weatherData.temperature;
 
-  let HOT_WEATHER = 86;
-  let COLD_WEATHER = 64;
+  const HOT_WEATHER = 86;
+  const COLD_WEATHER = 64;
 
-  let getWeatherType = () => {
+  const getWeatherType = () => {
     if (currentWeather >= HOT_WEATHER) {
       return "hot";
     } else if (
-      currentWeather >= (COLD_WEATHER - 1) &&
-      currentWeather <= (HOT_WEATHER - 1)
+      currentWeather >= COLD_WEATHER - 1 &&
+      currentWeather <= HOT_WEATHER - 1
     ) {
       return "warm";
     } else if (currentWeather <= COLD_WEATHER) {

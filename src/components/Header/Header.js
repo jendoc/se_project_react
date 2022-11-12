@@ -18,7 +18,11 @@ const Header = ({ weatherData, openModal }) => {
         <h2 className="header__location-data">
           {currentDate}, {weatherData.city}
         </h2>
-        <button className="header__add-clothes-btn" type="button" onClick={openModal}>
+        <button
+          className="header__add-clothes-btn"
+          type="button"
+          onClick={openModal}
+        >
           + Add clothes
         </button>
         <h2 className="header__user-name">Terrence Tegegne</h2>

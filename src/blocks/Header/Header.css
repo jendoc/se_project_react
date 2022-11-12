@@ -49,62 +49,60 @@
   }
 }
 
-@media screen and (min-width: 475px) and (max-width: 707px) { 
-    .header__container {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        grid-template-areas: 
-        "a a b b b"
-        "c c d d e"
-        ;
-        padding: 20px;
-    }
-    .header__location-data {
-        margin-right: 0;
-    }
-    .header__user-name {
-        margin-right: 0;
-        margin-left: auto;
-    }
-    .header__logo {
-        margin-right: 0;
-    }
-    .header__add-clothes-btn {
-        margin-right: 0;
-    }
-    .header__user-icon {
-        padding-left: 10px;
-    }
+@media screen and (min-width: 475px) and (max-width: 707px) {
+  .header__container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "a a b b b"
+      "c c d d e";
+    padding: 20px;
+  }
+  .header__location-data {
+    margin-right: 0;
+  }
+  .header__user-name {
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .header__logo {
+    margin-right: 0;
+  }
+  .header__add-clothes-btn {
+    margin-right: 0;
+  }
+  .header__user-icon {
+    padding-left: 10px;
+  }
 }
 
 @media screen and (max-width: 475px) {
-    .header__container {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-        "a b"
-        "e e"
-        "d d"
-        "c c"
-        ;
-        padding: 20px;
-    }
-    .header__location-data {
-        font-size: 20px;
-        padding-left: auto;
-    }
-    .header__user-name {
-        font-size: 20px;
-        margin: auto;
-    }
-    .header__user-icon {
-        margin: auto;
-        padding-bottom: 5px;
-    }
-    .header__add-clothes-btn {
-        margin: 15px;
-    }
-    .header__logo {
-        margin-right: 0;
-    }
+  .header__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "a b"
+      "e e"
+      "d d"
+      "c c";
+    padding: 20px;
+  }
+  .header__location-data {
+    font-size: 20px;
+    padding-left: auto;
+  }
+  .header__user-name {
+    font-size: 20px;
+    margin: auto;
+  }
+  .header__user-icon {
+    margin: auto;
+    padding-bottom: 5px;
+  }
+  .header__add-clothes-btn {
+    margin: 15px;
+  }
+  .header__logo {
+    margin-right: 0;
+  }
 }

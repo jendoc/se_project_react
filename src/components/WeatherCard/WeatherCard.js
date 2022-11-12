@@ -1,13 +1,13 @@
 import "../../blocks/WeatherCard/WeatherCard.css";
 
+const DAY_HOUR = 6;
+const NIGHT_HOUR = 17;
+
 function WeatherCard({ weatherData }) {
   if (!weatherData) return null;
 
   const today = new Date(),
     time = today.getHours();
-
-  const DAY_HOUR = 6;
-  const NIGHT_HOUR = 17;
 
   const getDay = (hours) => {
     if (hours >= DAY_HOUR && hours <= NIGHT_HOUR) {

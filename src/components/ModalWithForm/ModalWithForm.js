@@ -1,7 +1,6 @@
 import "../../blocks/ModalWithForm/ModalWithForm.css";
 
 function ModalWithForm({ isOpen, type, title, buttonText, onClose, children }) {
-
   return (
     <>
       <div

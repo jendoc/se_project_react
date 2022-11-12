@@ -51,7 +51,7 @@
   z-index: 3;
   /* filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg)
     brightness(103%) contrast(101%); */
-    /* With default item cards, white visibility is an issue*/
+  /* With default item cards, white visibility is an issue*/
 }
 
 .item-modal__close-btn:hover {

@@ -38,7 +38,10 @@ const App = () => {
 
   useEffect(() => {
     function handleOverlay(evt) {
-      if (evt.target.classList.contains("modal") || evt.target.classList.contains("item-modal")) {
+      if (
+        evt.target.classList.contains("modal") ||
+        evt.target.classList.contains("item-modal")
+      ) {
         closeModal();
       }
     }
