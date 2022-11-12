@@ -43,13 +43,15 @@ function WeatherCard({ weatherData }) {
     }
   }
 
+  console.log(process.env.PUBLIC_URL + "/" + getWeatherIcon())
+
   return (
     <div className={`weathercard weathercard__background_${getDay(time)}_${checkForRain()}`}>
       <h2 className="weathercard__temp">
         {Math.round(weatherData.temperature)}&deg;F
       </h2>
       <div className="weathercard__image-wrapper">
-        <img className="weathercard__image" src={process.env.PUBLIC_URL + getWeatherIcon()} />
+        <img className="weathercard__image" src={process.env.PUBLIC_URL + "/" + getWeatherIcon()} />
       </div>
     </div>
   );
