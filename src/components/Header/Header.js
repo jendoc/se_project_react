@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
-import logoPath from "../images/wtwr.svg";
-import iconPath from "../images/Avatar.svg";
+import logoPath from "../../images/wtwr.svg";
+import iconPath from "../../images/Avatar.svg";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",

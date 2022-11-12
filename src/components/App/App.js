@@ -5,11 +5,11 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { location, APIKey, defaultClothingItems } from "../utils/constants";
+import { location, APIKey, defaultClothingItems } from "../../utils/constants";
 import {
   getForecastWeather,
   filterDataFromWeatherAPI,
-} from "../utils/weatherApi";
+} from "../../utils/weatherApi";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
