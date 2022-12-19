@@ -2,6 +2,7 @@ import React from "react";
 import "../../blocks/Header/Header.css";
 import logoPath from "../../images/wtwr.svg";
 import iconPath from "../../images/Avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
@@ -18,6 +19,7 @@ const Header = ({ weatherData, openModal }) => {
         <h2 className="header__location-data">
           {currentDate}, {weatherData.city}
         </h2>
+        <ToggleSwitch />
         <button
           className="header__add-clothes-btn"
           type="button"
