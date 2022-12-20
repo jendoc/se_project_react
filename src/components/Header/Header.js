@@ -9,7 +9,7 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-const Header = ({ weatherData, openModal }) => {
+const Header = ({ weatherData, openModal, fahrenheitColor, celciusColor }) => {
   if (!weatherData) return null;
 
   return (
@@ -19,7 +19,8 @@ const Header = ({ weatherData, openModal }) => {
         <h2 className="header__location-data">
           {currentDate}, {weatherData.city}
         </h2>
-        <ToggleSwitch />
+        <ToggleSwitch
+        />
         <button
           className="header__add-clothes-btn"
           type="button"

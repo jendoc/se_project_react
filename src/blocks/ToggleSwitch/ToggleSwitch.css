@@ -41,13 +41,13 @@
   border-color: #000;
 }
 
-.toggle-switch__label:hover .toggle-switch__fahrenheit,
-.toggle-switch__label:hover .toggle-switch__celcius {
+.toggle-switch__label:hover .toggle-switch__label_fahrenheit,
+.toggle-switch__label:hover .toggle-switch__label_celcius {
   color: #fff;
 }
 
-.toggle-switch__fahrenheit,
-.toggle-switch__celcius {
+.toggle-switch__label_fahrenheit,
+.toggle-switch__label_celcius {
   position: absolute;
   margin: 0;
   font-family: "Cabinet Grotesk", "Arial", "Helvetica", sans-serif;
@@ -62,16 +62,15 @@
   justify-content: center;
   align-items: center;
   transition: 0.3s;
-  color: #7e7e7e;
   mix-blend-mode: difference;
 }
 
-.toggle-switch__fahrenheit {
+.toggle-switch__label_fahrenheit {
   top: -2px;
   left: -2px;
 }
 
-.toggle-switch__celcius {
+.toggle-switch__label_celcius {
   top: -2px;
   right: -2px;
 }
