@@ -7,20 +7,23 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 function Main({ weatherData, defaultClothing, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  const currentWeather = weatherData.temperature[currentTemperatureUnit];
+  const currentTemp =
+    currentTemperatureUnit === "F"
+      ? weatherData?.temperature?.F
+      : weatherData?.temperature?.C;
 
   const HOT_WEATHER = 86;
   const COLD_WEATHER = 64;
 
   const getWeatherType = () => {
-    if (currentWeather >= HOT_WEATHER) {
+    if (currentTemp >= HOT_WEATHER) {
       return "hot";
     } else if (
-      currentWeather >= COLD_WEATHER - 1 &&
-      currentWeather <= HOT_WEATHER - 1
+      currentTemp >= COLD_WEATHER - 1 &&
+      currentTemp <= HOT_WEATHER - 1
     ) {
       return "warm";
-    } else if (currentWeather <= COLD_WEATHER) {
+    } else if (currentTemp <= COLD_WEATHER) {
       return "cold";
     }
   };
@@ -39,9 +42,11 @@ function Main({ weatherData, defaultClothing, handleCardClick }) {
 
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard weatherData={weatherData} currentTemp={currentTemp} />
       <h3 className="main__header">
-        Today is {currentWeather} / You may want to wear:
+        Today is
+        {` ${currentTemp}°${currentTemperatureUnit} `} / You may want
+        to wear:
       </h3>
       <ul className="main__gallery">
         {clothingOptions.map((item) => (
