@@ -12,7 +12,7 @@
   width: 50px;
   height: 26px;
   background-color: #fff;
-  border-radius: 100px;
+  border-radius: 25px;
   position: relative;
   border: 2px #7e7e7e solid;
   box-sizing: border-box;
@@ -38,7 +38,12 @@
 }
 
 .toggle-switch__label:hover {
-  border: 2px #000 solid;
+  border-color: #000;
+}
+
+.toggle-switch__label:hover .toggle-switch__fahrenheit,
+.toggle-switch__label:hover .toggle-switch__celcius {
+  color: #fff;
 }
 
 .toggle-switch__fahrenheit,
@@ -58,6 +63,7 @@
   align-items: center;
   transition: 0.3s;
   color: #7e7e7e;
+  mix-blend-mode: difference;
 }
 
 .toggle-switch__fahrenheit {
@@ -68,4 +74,8 @@
 .toggle-switch__celcius {
   top: -2px;
   right: -2px;
+}
+
+.toggle-switch__label:active .toggle-switch__button {
+  width: 28px;
 }
