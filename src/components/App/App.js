@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
+
 import "../../blocks/App/App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+
 import { location, APIKey, defaultClothingItems } from "../../utils/constants";
 import {
   getForecastWeather,
@@ -68,6 +70,10 @@ const App = () => {
       : setCurrentTemperatureUnit("F");
   };
 
+  const handleAddItemSubmit = () => {
+    
+  }
+
   return (
     <>
       <div className="App">
@@ -98,77 +104,18 @@ const App = () => {
             />
           </Route>
           <Footer />
-          <ModalWithForm
+
+          <AddItemModal
             isOpen={activeModal === "add"}
-            type="add"
-            title="New garment"
-            buttonText="Add garment"
-            onClose={closeModal}
-          >
-            <h4 className="form__label">Name</h4>
-            <input
-              className="form__input form__input_type_name"
-              name="name"
-              type="text"
-              placeholder="Name"
-              minLength="1"
-              maxLength="40"
-              required
-            />
-            <h4 className="form__label">Image</h4>
-            <input
-              className="form__input form__input_type_image"
-              name="image"
-              type="url"
-              placeholder="Image URL"
-              required
-            />
-            <h4 className="form__label">Select the weather type:</h4>
-            <div className="form__radio-container">
-              <div className="form__radio">
-                <input
-                  className="form__input_radio"
-                  name="temp"
-                  value="Hot"
-                  type="radio"
-                  id="hot"
-                />
-                <label className="form__label_radio" htmlFor="hot">
-                  Hot
-                </label>
-              </div>
-              <div className="form__radio">
-                <input
-                  className="form__input_radio"
-                  name="temp"
-                  value="Warm"
-                  type="radio"
-                  id="warm"
-                />
-                <label className="form__label_radio" htmlFor="warm">
-                  Warm
-                </label>
-              </div>
-              <div className="form__radio">
-                <input
-                  className="form__input_radio"
-                  name="temp"
-                  value="Cold"
-                  type="radio"
-                  id="cold"
-                />
-                <label className="form__label_radio" htmlFor="cold">
-                  Cold
-                </label>
-              </div>
-            </div>
-          </ModalWithForm>
+            type={"add"}
+            onCloseModal={closeModal}
+          />
 
           <ItemModal
             isOpen={activeModal === "item"}
             type={"item"}
             card={selectedCard}
-            onClose={closeModal}
+            onCloseModal={closeModal}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>
