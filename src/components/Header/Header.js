@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../blocks/Header/Header.css";
 import logoPath from "../../images/wtwr.svg";
 import iconPath from "../../images/Avatar.svg";
@@ -9,13 +10,15 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-const Header = ({ weatherData, openModal, fahrenheitColor, celciusColor }) => {
+const Header = ({ weatherData, openModal }) => {
   if (!weatherData) return null;
 
   return (
     <header className="header">
       <div className="header__container">
+        <Link to={'/'}>
         <img src={logoPath} alt="WTWR Logo" className="header__logo" />
+        </Link>
         <h2 className="header__location-data">
           {currentDate}, {weatherData.city}
         </h2>
@@ -28,8 +31,10 @@ const Header = ({ weatherData, openModal, fahrenheitColor, celciusColor }) => {
         >
           + Add clothes
         </button>
+        <Link to={'/profile'} style={{textDecoration: 'none', display: 'flex', alignItems: 'center'}}>
         <h2 className="header__user-name">Terrence Tegegne</h2>
         <img className="header__user-icon" src={iconPath} alt="User avatar" />
+        </Link>
       </div>
     </header>
   );

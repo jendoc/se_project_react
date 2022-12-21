@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
 import "../../blocks/App/App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
@@ -78,11 +80,23 @@ const App = () => {
               setActiveModal("add");
             }}
           />
-          <Main
-            weatherData={weatherData}
-            defaultClothing={defaultClothingItems}
-            handleCardClick={handleCardClick}
-          />
+          <Route exact path={"/"}>
+            <Main
+              weatherData={weatherData}
+              defaultClothing={defaultClothingItems}
+              handleCardClick={handleCardClick}
+            />
+          </Route>
+          <Route path={"/profile"}>
+            <Profile
+              weatherData={weatherData}
+              defaultClothing={defaultClothingItems}
+              handleCardClick={handleCardClick}
+              openModal={() => {
+                setActiveModal("add");
+              }}
+            />
+          </Route>
           <Footer />
           <ModalWithForm
             isOpen={activeModal === "add"}
