@@ -70,21 +70,19 @@ const App = () => {
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
   };
+
   const fetchClothingItems = () => {
     getItems()
       .then((data) => {
         setClothingItems(data);
+        console.log(data);
       })
       .catch((err) => console.log(err));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchClothingItems();
   }, []);
-
-  const handleAddItemSubmit = () => {
-    
-  }
 
   return (
     <>
@@ -101,14 +99,14 @@ const App = () => {
           <Route exact path={"/"}>
             <Main
               weatherData={weatherData}
-              clothing={clothingItems}
+              clothingItems={clothingItems}
               handleCardClick={handleCardClick}
             />
           </Route>
           <Route path={"/profile"}>
             <Profile
               weatherData={weatherData}
-              clothing={clothingItems}
+              clothingItems={clothingItems}
               handleCardClick={handleCardClick}
               openModal={() => {
                 setActiveModal("add");

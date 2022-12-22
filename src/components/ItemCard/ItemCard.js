@@ -6,7 +6,7 @@ function ItemCard({ clothingOption, onClick }) {
       <h5 className="card__title">{clothingOption.name}</h5>
       <img
         className="card__image"
-        src={clothingOption.link}
+        src={clothingOption.imageUrl}
         alt={clothingOption.name}
       />
     </li>

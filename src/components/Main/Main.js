@@ -4,7 +4,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, defaultClothing, handleCardClick }) {
+function Main({ weatherData, clothingItems, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const currentTemp =
@@ -36,7 +36,7 @@ function Main({ weatherData, defaultClothing, handleCardClick }) {
     }
   }
 
-  const clothingOptions = defaultClothing.filter((items) =>
+  const clothingOptions = clothingItems.filter((items) =>
     filterClothing(items)
   );
 
@@ -45,17 +45,16 @@ function Main({ weatherData, defaultClothing, handleCardClick }) {
       <WeatherCard weatherData={weatherData} currentTemp={currentTemp} />
       <h3 className="main__header">
         Today is
-        {` ${currentTemp}°${currentTemperatureUnit} `} / You may want
-        to wear:
+        {` ${currentTemp}°${currentTemperatureUnit} `} / You may want to wear:
       </h3>
       <ul className="main__gallery">
         {clothingOptions.map((item) => (
           <ItemCard
             isOpen="false"
             clothingOption={item}
-            key={item._id}
+            key={item.id}
             name={item.name}
-            image={item.link}
+            image={item.imageUrl}
             weather={item.weather}
             onClick={() => handleCardClick(item)}
           />

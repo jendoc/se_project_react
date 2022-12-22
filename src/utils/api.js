@@ -33,7 +33,7 @@ const addItem = async (name, imageURL, weatherType) => {
 };
 
 const deleteItem = async (id) => {
-  const res = await fetch(`${baseUrl}/items/:${id}`, {
+  const res = await fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: headers,
   });
