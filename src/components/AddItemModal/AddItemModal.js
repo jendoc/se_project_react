@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "../../blocks/AddItemModal/AddItemModal.css";
 
-const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
+const AddItemModal = ({ isOpen, onAddItem, closeModal }) => {
   const [name, setName] = useState("");
   const [clothingItems, setClothingItems] = useState([]);
-  const [imageURL, setImageURL] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [weatherType, setWeatherType] = useState("");
 
   useEffect(() => {
     setName("");
-    setImageURL("");
+    setImageUrl("");
     setWeatherType(null);
   }, [isOpen]);
 
   const handleNameChange = (evt) => {
-    evt.setName(evt.target.value);
+    setName(evt.target.value);
   };
 
-  const handleImageURLChange = (evt) => {
-    evt.setImageURL(evt.target.value);
+  const handleImageUrlChange = (evt) => {
+    setImageUrl(evt.target.value);
   };
 
   const handleWeatherChange = (evt) => {
-    evt.setWeatherType(evt.target.value);
+    setWeatherType(evt.target.value);
   };
 
   const handleSumbit = (evt) => {
     evt.preventDefault();
-    onAddItem(name, imageURL, weatherType);
+    onAddItem(name, imageUrl, weatherType);
   };
 
   return (
@@ -37,7 +36,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
       type="add"
       title="New garment"
       buttonText="Add garment"
-      onClose={onCloseModal}
+      onClose={closeModal}
       onSubmit={handleSumbit}
     >
       <h4 className="form__label">Name</h4>
@@ -53,7 +52,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
       />
       <h4 className="form__label">Image</h4>
       <input
-        onChange={handleImageURLChange}
+        onChange={handleImageUrlChange}
         className="form__input form__input_type_image"
         name="image"
         type="url"

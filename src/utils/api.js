@@ -19,13 +19,13 @@ const getItems = async () => {
   return handleServerResponse(res);
 };
 
-const addItem = async (name, imageURL, weatherType) => {
+const addItem = async (name, imageUrl, weatherType) => {
   const res = await fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
       name,
-      imageURL,
+      imageUrl,
       weatherType,
     }),
   });

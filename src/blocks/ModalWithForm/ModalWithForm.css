@@ -120,10 +120,10 @@
   background-color: #00000099;
 }
 
-.modal__form-submit-btn_disabled {
+.modal__form-submit-btn:disabled {
   background-color: #0000004d;
 }
 
-.modal__form-submit-btn_disabled:hover {
+.modal__form-submit-btn:hover {
   cursor: default;
 }

@@ -9,7 +9,7 @@
   visibility: visible;
   opacity: 1;
   transition: visibility 0s, opacity 0.5s linear;
-  z-index: 2;
+  z-index: 3;
 }
 
 .item-modal:hover {
@@ -64,7 +64,28 @@
   border-top-right-radius: 16px;
 }
 
-.item-modal__name,
-.item-modal__weather {
-  margin-left: 32px;
+.item-modal__info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px auto auto 32px;
+  row-gap: 12px;
+}
+
+.item-modal__name, .item-modal__weather, .item-modal__delete-btn {
+  margin: 0;
+}
+
+.item-modal__delete-btn {
+  color: #FF4D00;
+  transition: 0.2s;
+  justify-self: flex-end;
+  margin-right: 32px;
+  border: none;
+  background-color: inherit;
+  font-size: 20px;
+}
+
+.item-modal__delete-btn:hover {
+  cursor: pointer;
+  color: #FF4D00cc;
 }
