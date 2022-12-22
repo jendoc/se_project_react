@@ -8,8 +8,8 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
-
-import { location, APIKey, defaultClothingItems } from "../../utils/constants";
+import { getItems, addItem, removeItem } from "../../utils/api";
+import { location, APIKey } from "../../utils/constants";
 import {
   getForecastWeather,
   filterDataFromWeatherAPI,
@@ -19,6 +19,7 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -69,6 +70,17 @@ const App = () => {
       ? setCurrentTemperatureUnit("C")
       : setCurrentTemperatureUnit("F");
   };
+  const fetchClothingItems = () => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  React.useEffect(() => {
+    fetchClothingItems();
+  }, []);
 
   const handleAddItemSubmit = () => {
     
@@ -89,14 +101,14 @@ const App = () => {
           <Route exact path={"/"}>
             <Main
               weatherData={weatherData}
-              defaultClothing={defaultClothingItems}
+              clothing={clothingItems}
               handleCardClick={handleCardClick}
             />
           </Route>
           <Route path={"/profile"}>
             <Profile
               weatherData={weatherData}
-              defaultClothing={defaultClothingItems}
+              clothing={clothingItems}
               handleCardClick={handleCardClick}
               openModal={() => {
                 setActiveModal("add");

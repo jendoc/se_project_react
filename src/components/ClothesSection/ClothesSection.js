@@ -2,7 +2,7 @@ import "../../blocks/ClothesSection/ClothesSection.css";
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ defaultClothing, handleCardClick, openModal }) {
+function ClothesSection({ clothingItems, handleCardClick, openModal }) {
   return (
     <div className="profile__clothes-section">
       <div className="profile__clothes-section-header">
@@ -16,7 +16,7 @@ function ClothesSection({ defaultClothing, handleCardClick, openModal }) {
       </button>
       </div>
       <ul className="profile__clothes-section-items">
-        {defaultClothing.map((item) => (
+        {clothingItems.map((item) => (
           <ItemCard
             isOpen="false"
             clothingOption={item}
