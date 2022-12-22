@@ -20,9 +20,9 @@ function ClothesSection({ clothingItems, handleCardClick, openModal }) {
           <ItemCard
             isOpen="false"
             clothingOption={item}
-            key={item._id}
+            key={item.id}
             name={item.name}
-            image={item.link}
+            image={item.imageUrl}
             weather={item.weather}
             onClick={() => handleCardClick(item)}
           />
