@@ -23,6 +23,9 @@
   z-index: 0;
   margin-top: -65px;
   border-radius: 16px;
+  width: 323px;
+  height: 326px;
+  object-fit: cover;
 }
 
 .card:hover {

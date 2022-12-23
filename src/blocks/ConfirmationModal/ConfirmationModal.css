@@ -1,4 +1,5 @@
-.confirm-modal__cancel-btn {
+.confirm-modal__cancel-btn,
+.confirm-modal__delete-btn {
   border: none;
   background-color: inherit;
   font-size: 20px;
@@ -62,26 +63,23 @@
 }
 
 .confirm-modal__close-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .confirm-modal__title {
-    text-align: center;
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 40px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 40px;
 }
 
 .confirm-modal__delete-btn {
-    color: #FF4D00;
-    border: none;
-    background-color: inherit;
-    font-size: 20px;
-    margin-bottom: 24px;
-    transition: 0.2s;
+  color: #ff4d00;
+  margin-bottom: 24px;
 }
 
-.confirm-modal__delete-btn:hover, .confirm-modal__cancel-btn:hover {
-    cursor: pointer;
-    opacity: 80%;
+.confirm-modal__delete-btn:hover,
+.confirm-modal__cancel-btn:hover {
+  cursor: pointer;
+  opacity: 80%;
 }

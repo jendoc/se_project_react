@@ -104,7 +104,7 @@ const App = () => {
   const handleAddItemSubmit = (name, imageUrl, weatherType) => {
     addItem(name, imageUrl, weatherType)
       .then((item) => {
-        const items = [...clothingItems, item];
+        const items = [item, ...clothingItems];
         setClothingItems(items);
         closeModal();
       })
