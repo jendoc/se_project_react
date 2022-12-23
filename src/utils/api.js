@@ -3,6 +3,10 @@ const headers = {
   "Content-Type": "application/json",
 };
 
+function request(url, options) {
+  return fetch(url, options).then(handleServerResponse);
+}
+
 const handleServerResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -12,15 +16,14 @@ const handleServerResponse = (res) => {
 };
 
 const getItems = async () => {
-  const res = await fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "GET",
     headers: headers,
   });
-  return handleServerResponse(res);
 };
 
 const addItem = async (name, imageUrl, weather) => {
-  const res = await fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({
@@ -29,15 +32,13 @@ const addItem = async (name, imageUrl, weather) => {
       weather,
     }),
   });
-  return handleServerResponse(res);
 };
 
 const deleteItem = async (id) => {
-  const res = await fetch(`${baseUrl}/items/${id}`, {
+  return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: headers,
   });
-  return handleServerResponse(res);
 };
 
 export { getItems, addItem, deleteItem };

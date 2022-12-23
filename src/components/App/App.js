@@ -15,7 +15,7 @@ import {
   filterDataFromWeatherAPI,
 } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -59,7 +59,7 @@ const App = () => {
   }, []);
 
   const closeModal = () => {
-    setActiveModal(false);
+    setActiveModal("");
   };
 
   const handleCardClick = (card) => {
@@ -112,7 +112,6 @@ const App = () => {
   };
 
   return (
-    <>
       <div className="App">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -165,7 +164,6 @@ const App = () => {
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>
-    </>
   );
 };
 

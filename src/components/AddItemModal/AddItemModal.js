@@ -45,6 +45,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
         className="form__input form__input_type_name"
         name="name"
         type="text"
+        value="name"
         placeholder="Name"
         minLength="1"
         maxLength="40"
@@ -56,6 +57,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
         className="form__input form__input_type_image"
         name="image"
         type="url"
+        value="imageUrl"
         placeholder="Image URL"
         required
       />

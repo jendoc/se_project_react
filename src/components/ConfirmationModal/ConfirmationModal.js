@@ -1,5 +1,5 @@
 import React from "react";
-import "../blocks/ConfirmationModal/ConfirmationModal.css";
+import "../../blocks/ConfirmationModal/ConfirmationModal.css";
 
 const ConfirmationModal = ({ isOpen, name, onCloseModal, onCardDelete }) => {
   return (

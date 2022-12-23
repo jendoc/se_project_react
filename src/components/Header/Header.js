@@ -31,7 +31,7 @@ const Header = ({ weatherData, openModal }) => {
         >
           + Add clothes
         </button>
-        <Link to={'/profile'} style={{textDecoration: 'none', display: 'flex', alignItems: 'center'}}>
+        <Link to={'/profile'} className="header__profile-link" style={{textDecoration: 'none', display: 'flex', alignItems: 'center'}}>
         <h2 className="header__user-name">Terrence Tegegne</h2>
         <img className="header__user-icon" src={iconPath} alt="User avatar" />
         </Link>

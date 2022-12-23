@@ -29,16 +29,10 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
   };
 
   function filterClothing(card) {
-    if (card.weather === getWeatherType()) {
-      return true;
-    } else {
-      return false;
-    }
+    return card.weather === getWeatherType();
   }
 
-  const clothingOptions = clothingItems.filter((items) =>
-    filterClothing(items)
-  );
+  const clothingOptions = clothingItems.filter(filterClothing);
 
   return (
     <main className="main">
@@ -53,9 +47,6 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
             isOpen="false"
             clothingOption={item}
             key={item.id}
-            name={item.name}
-            image={item.imageUrl}
-            weather={item.weather}
             onClick={() => handleCardClick(item)}
           />
         ))}

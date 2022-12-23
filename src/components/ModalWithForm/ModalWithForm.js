@@ -10,7 +10,6 @@ function ModalWithForm({
   children
 }) {
   return (
-    <>
       <div
         className={
           isOpen
@@ -40,7 +39,6 @@ function ModalWithForm({
           </form>
         </div>
       </div>
-    </>
   );
 }
 
