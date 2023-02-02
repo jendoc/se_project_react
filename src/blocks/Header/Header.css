@@ -20,15 +20,16 @@
   grid-area: b;
 }
 
-.header__add-clothes-btn {
+.header__btn {
   margin: 0px 20px;
   border: 0;
   background-color: transparent;
   grid-area: c;
   padding: 0px;
+  font-weight: 700;
 }
 
-.header__add-clothes-btn:hover {
+.header__btn:hover {
   cursor: pointer;
 }
 
@@ -70,7 +71,7 @@
   .header__logo {
     margin-right: 0;
   }
-  .header__add-clothes-btn {
+  .header__btn {
     margin-right: 0;
   }
   .header__user-icon {
@@ -102,7 +103,7 @@
     margin: auto;
     padding-bottom: 5px;
   }
-  .header__add-clothes-btn {
+  .header__btn {
     margin: 15px;
   }
   .header__logo {

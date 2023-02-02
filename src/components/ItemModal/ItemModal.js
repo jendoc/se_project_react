@@ -1,6 +1,21 @@
 import "../../blocks/ItemModal/ItemModal.css";
 
-function ItemModal({ isOpen, name, card, onCloseModal, onDeleteClick }) {
+function ItemModal({
+  isOpen,
+  name,
+  card,
+  onCloseModal,
+  onDeleteClick,
+  currentUser,
+}) {
+  // Checking if the current user is the owner of the current clothing item
+  const isOwn = item.owner._id === currentUser._id;
+
+  // Creating a variable which you'll then set in `className` for the delete button
+  const itemDeleteButtonClassName = `item__delete-button ${
+    isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
+  }`;
+
   return (
     <div
       className={
@@ -11,11 +26,17 @@ function ItemModal({ isOpen, name, card, onCloseModal, onDeleteClick }) {
     >
       <div className="item-modal__body">
         <button className="item-modal__close-btn" onClick={onCloseModal} />
-        <img className="item-modal__image" src={card.imageUrl} alt={card.name} />
+        <img
+          className="item-modal__image"
+          src={card.imageUrl}
+          alt={card.name}
+        />
         <div className="item-modal__info">
-        <h3 className="item-modal__name">{card.name}</h3>
-        <button className="item-modal__delete-btn" onClick={onDeleteClick}>Delete item</button>
-        <h3 className="item-modal__weather">Weather: {card.weather}</h3>
+          <h3 className="item-modal__name">{card.name}</h3>
+          <button className={itemDeleteButtonClassName} onClick={onDeleteClick}>
+            Delete item
+          </button>
+          <h3 className="item-modal__weather">Weather: {card.weather}</h3>
         </div>
       </div>
     </div>

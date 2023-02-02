@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import ProtectedRoute from "../ProtectedRoute";
 
 import "../../blocks/App/App.css";
 import Header from "../Header/Header";
@@ -8,6 +9,10 @@ import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+
 import { getItems, addItem, deleteItem } from "../../utils/api";
 import { location, APIKey } from "../../utils/constants";
 import {
@@ -15,7 +20,9 @@ import {
   filterDataFromWeatherAPI,
 } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import * as auth from "../../utils/auth";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -23,6 +30,12 @@ const App = () => {
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    avatar: "",
+    id: "",
+  });
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
@@ -111,34 +124,74 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleRegistration = async (name, avatar, email, password) => {
+    return auth.register(name, avatar, email, password).then((data) => {
+      setIsLoggedIn(true);
+      setCurrentUser({ name: data.name, avatar: data.avatar });
+      closeModal();
+    });
+  };
+
+  const handleAuthorization = async (email, password) => {
+    return auth
+      .authorize(email, password)
+      .then((res) => {
+        closeModal();
+        setIsLoggedIn(true);
+        localStorage.setItem("jwt", res.token);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const jwt = localStorage.getItem("token");
+      setIsLoggedIn(true);
+    }
+  });
+
   return (
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <Header
             weatherData={weatherData}
-            openModal={() => {
+            openAddModal={() => {
               setActiveModal("add");
             }}
+            openLoginModal={() => {
+              setActiveModal("login");
+            }}
+            openRegisterModal={() => {
+              setActiveModal("register");
+            }}
           />
-          <Route exact path={"/"}>
-            <Main
-              weatherData={weatherData}
-              clothingItems={clothingItems}
-              handleCardClick={handleCardClick}
-            />
-          </Route>
-          <Route path={"/profile"}>
-            <Profile
-              weatherData={weatherData}
-              clothingItems={clothingItems}
-              handleCardClick={handleCardClick}
-              openModal={() => {
-                setActiveModal("add");
-              }}
-            />
-          </Route>
+          <Switch>
+            <Route path={"/"}>
+              <Main
+                weatherData={weatherData}
+                clothingItems={clothingItems}
+                handleCardClick={handleCardClick}
+                loggedIn={isLoggedIn}
+              />
+            </Route>
+            <ProtectedRoute loggedIn={isLoggedIn} path={"/profile"}>
+              <Profile
+                user={currentUser}
+                weatherData={weatherData}
+                clothingItems={clothingItems}
+                handleCardClick={handleCardClick}
+                openModal={() => {
+                  setActiveModal("add");
+                }}
+                loggedIn={isLoggedIn}
+              />
+            </ProtectedRoute>
+          </Switch>
           <Footer />
 
           <AddItemModal
@@ -162,8 +215,33 @@ const App = () => {
             onCloseModal={closeModal}
             onCardDelete={handleCardDelete}
           />
+
+          <LoginModal
+            handleSignIn={handleAuthorization}
+            isOpen={activeModal === "login"}
+            type={"login"}
+            onCloseModal={closeModal}
+            isLoggedIn={setIsLoggedIn}
+          />
+
+          <RegisterModal
+            handleSignUp={handleRegistration}
+            isOpen={activeModal === "register"}
+            type={"register"}
+            onCloseModal={closeModal}
+            isLoggedIn={setIsLoggedIn}
+          />
+
+          <EditProfileModal
+            isOpen={activeModal === "update"}
+            type={"update"}
+            onCloseModal={closeModal}
+            isLoggedIn={setIsLoggedIn}
+            currentUser={currentUser}
+          />
         </CurrentTemperatureUnitContext.Provider>
       </div>
+    </CurrentUserContext.Provider>
   );
 };
 

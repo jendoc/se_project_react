@@ -1,7 +1,4 @@
-const baseUrl = "https://my-json-server.typicode.com/jendoc/se_project_react";
-const headers = {
-  "Content-Type": "application/json",
-};
+import { baseUrl, headers } from "./constants";
 
 function request(url, options) {
   return fetch(url, options).then(handleServerResponse);
@@ -22,10 +19,13 @@ const getItems = async () => {
   });
 };
 
-const addItem = async (name, imageUrl, weather) => {
+const addItem = async (name, imageUrl, weather, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify({
       name,
       imageUrl,
@@ -34,10 +34,13 @@ const addItem = async (name, imageUrl, weather) => {
   });
 };
 
-const deleteItem = async (id) => {
+const deleteItem = async (id, token) => {
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   });
 };
 
