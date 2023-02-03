@@ -14,7 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
 import { getItems, addItem, deleteItem } from "../../utils/api";
-import { location, APIKey } from "../../utils/constants";
+import { location, APIKey, baseUrl } from "../../utils/constants";
 import {
   getForecastWeather,
   filterDataFromWeatherAPI,
@@ -135,10 +135,9 @@ const App = () => {
   const handleAuthorization = async (email, password) => {
     return auth
       .authorize(email, password)
-      .then((res) => {
+      .then(() => {
         closeModal();
         setIsLoggedIn(true);
-        localStorage.setItem("jwt", res.token);
       })
       .catch((e) => {
         console.log(e);
@@ -149,8 +148,19 @@ const App = () => {
     if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
       setIsLoggedIn(true);
+      auth.checkToken(baseUrl, jwt)
+      .then((res) => {
+        setCurrentUser({
+          name: res?.data?.name,
+          avatar: res?.data.avatar,
+          id: res?.data?._id
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
     }
-  });
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

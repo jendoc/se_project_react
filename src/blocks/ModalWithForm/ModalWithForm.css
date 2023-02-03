@@ -24,7 +24,6 @@
 
 .modal__body {
   width: 496px;
-  height: 436px;
   background-color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -113,6 +112,7 @@
   width: 124px;
   transition: 0.2s ease-in-out;
   margin-top: 32px;
+  margin-bottom: 36px;
 }
 
 .modal__form-submit-btn:hover:not(:disabled) {

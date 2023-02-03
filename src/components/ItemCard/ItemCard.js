@@ -1,11 +1,11 @@
 import "../../blocks/ItemCard/ItemCard.css";
 
-function ItemCard({ clothingOption, onClick }) {
+function ItemCard({ clothingOption, onClick, currentUser }) {
   // Check if the item was liked by the current user
-  const isLiked = item.likes.some((user) => user._id === currentUser._id);
+  //const isLiked = clothingOption.likes.some((user) => user._id === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
-  const itemLikeButtonClassName = `...`;
+  //const itemLikeButtonClassName = `...`;
 
   return (
     <li className="card" onClick={onClick}>
