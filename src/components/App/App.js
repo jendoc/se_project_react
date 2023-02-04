@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -33,8 +33,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
-    avatar: "",
-    id: "",
+    avatar: ""
   });
 
   useEffect(() => {
@@ -102,6 +101,12 @@ const App = () => {
       : setCurrentTemperatureUnit("F");
   };
 
+  const handleToggleModal = () => {
+    activeModal === "login"
+    ? setActiveModal("register")
+    : setActiveModal("login")
+  }
+
   const fetchClothingItems = () => {
     getItems()
       .then((data) => {
@@ -124,10 +129,11 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleRegistration = async (name, avatar, email, password) => {
-    return auth.register(name, avatar, email, password).then((data) => {
+  const handleRegistration = async (email, password, name, avatar) => {
+    return auth.register(email, password, name, avatar).then(() => {
       setIsLoggedIn(true);
-      setCurrentUser({ name: data.name, avatar: data.avatar });
+      setCurrentUser({ name: name, avatar: avatar });
+      console.log(currentUser)
       closeModal();
     });
   };
@@ -234,7 +240,7 @@ const App = () => {
             onCloseModal={closeModal}
             isLoggedIn={setIsLoggedIn}
             handleAuthorization={handleAuthorization}
-            buttonAlt={"or Register"}
+            handleToggleModal={handleToggleModal}
           />
 
           <RegisterModal
@@ -244,7 +250,7 @@ const App = () => {
             onCloseModal={closeModal}
             isLoggedIn={setIsLoggedIn}
             handleRegistration={handleRegistration}
-            buttonAlt={"or Log in"}
+            handleToggleModal={handleToggleModal}
           />
 
           <EditProfileModal

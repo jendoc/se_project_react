@@ -8,7 +8,6 @@ function ModalWithForm({
   onCloseModal,
   onSubmit,
   children,
-  buttonAlt,
 }) {
   return (
     <div
@@ -31,7 +30,6 @@ function ModalWithForm({
           >
             {buttonText}
           </button>
-          <p className="modal__form-btn_alt">{`${buttonAlt}`}</p>
         </form>
       </div>
     </div>

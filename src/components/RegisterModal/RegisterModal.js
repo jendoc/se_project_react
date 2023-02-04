@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ isOpen, onCloseModal, handleRegistration }) => {
+const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -74,6 +74,8 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration }) => {
         onChange={(e) => setAvatar(e.target.value)}
         placeholder="Avatar URL"
       />
+      
+      <p className="modal__form-btn_alt" onClick={handleToggleModal}>or Log in</p>
     </ModalWithForm>
   );
 };

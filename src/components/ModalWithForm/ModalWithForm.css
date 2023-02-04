@@ -131,4 +131,15 @@
 .modal__form-btn_alt {
   color: rgba(0, 0, 0, 0.5);
   font-size: 16px;
+  transition: 0.2s;
+  position: relative;
+  top: 15px;
+  left: 140px;
+  margin-bottom: -44px;
+  width: fit-content;
+}
+
+.modal__form-btn_alt:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
 }

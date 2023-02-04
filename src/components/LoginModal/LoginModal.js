@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ isOpen, onCloseModal, handleAuthorization }) => {
+const LoginModal = ({ isOpen, onCloseModal, handleAuthorization, handleToggleModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
@@ -52,6 +52,7 @@ const LoginModal = ({ isOpen, onCloseModal, handleAuthorization }) => {
         placeholder="Password"
         required
       />
+      <p className="modal__form-btn_alt" onClick={handleToggleModal} >or Register</p>
     </ModalWithForm>
   );
 };
