@@ -1,6 +1,9 @@
-import "../../blocks/ItemCard/ItemCard.css";
+import { useContext } from "react";
+import "./ItemCard.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemCard({ clothingOption, onClick, currentUser }) {
+function ItemCard({ clothingOption, onClick }) {
+  const currentUser = useContext(CurrentUserContext);
   // Check if the item was liked by the current user
   //const isLiked = clothingOption.likes.some((user) => user._id === currentUser._id);
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute";
 
-import "../../blocks/App/App.css";
+import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
@@ -148,23 +148,24 @@ const App = () => {
     if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
       setIsLoggedIn(true);
-      auth.checkToken(baseUrl, jwt)
-      .then((res) => {
-        setCurrentUser({
-          name: res?.data?.name,
-          avatar: res?.data.avatar,
-          id: res?.data?._id
+      auth
+        .checkToken(baseUrl, jwt)
+        .then((res) => {
+          setCurrentUser({
+            name: res?.data?.name,
+            avatar: res?.data.avatar,
+            id: res?.data?._id,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
         });
-      })
-      .catch((e) => {
-        console.log(e);
-      })
     }
   }, [isLoggedIn]);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
+    <div className="App">
+      <CurrentUserContext.Provider value={currentUser}>
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
@@ -232,6 +233,8 @@ const App = () => {
             type={"login"}
             onCloseModal={closeModal}
             isLoggedIn={setIsLoggedIn}
+            handleAuthorization={handleAuthorization}
+            buttonAlt={"or Register"}
           />
 
           <RegisterModal
@@ -240,6 +243,8 @@ const App = () => {
             type={"register"}
             onCloseModal={closeModal}
             isLoggedIn={setIsLoggedIn}
+            handleRegistration={handleRegistration}
+            buttonAlt={"or Log in"}
           />
 
           <EditProfileModal
@@ -250,8 +255,8 @@ const App = () => {
             currentUser={currentUser}
           />
         </CurrentTemperatureUnitContext.Provider>
-      </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </div>
   );
 };
 

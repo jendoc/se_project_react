@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ isOpen, onCloseModal }) => {
+const LoginModal = ({ isOpen, onCloseModal, handleAuthorization }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     setEmail("");
     setPassword("");
   }, [isOpen]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleAuthorization(email, password)
+    .then(() => {
+      history.push('/profie');
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+  }
 
   return (
     <ModalWithForm
@@ -17,6 +30,7 @@ const LoginModal = ({ isOpen, onCloseModal }) => {
       title="Log in"
       buttonText="Log in"
       onCloseModal={onCloseModal}
+      onSubmit={handleSubmit}
     >
       <h4 className="form__label">Email</h4>
       <input

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ isOpen, onCloseModal }) => {
+const RegisterModal = ({ isOpen, onCloseModal, handleRegistration }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     setEmail("");
@@ -14,6 +16,17 @@ const RegisterModal = ({ isOpen, onCloseModal }) => {
     setAvatar("");
   }, [isOpen]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(email, password, name, avatar)
+      .then(() => {
+        history.push("/profile");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <ModalWithForm
       isOpen={isOpen}
@@ -21,6 +34,7 @@ const RegisterModal = ({ isOpen, onCloseModal }) => {
       title="Sign up"
       buttonText="Next"
       onCloseModal={onCloseModal}
+      onSubmit={handleSubmit}
     >
       <h4 className="form__label">Email*</h4>
       <input
@@ -46,7 +60,7 @@ const RegisterModal = ({ isOpen, onCloseModal }) => {
       <input
         className="form__input"
         name="name"
-        type="name"
+        type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name"

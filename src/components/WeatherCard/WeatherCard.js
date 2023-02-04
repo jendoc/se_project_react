@@ -1,4 +1,4 @@
-import "../../blocks/WeatherCard/WeatherCard.css";
+import "./WeatherCard.css";
 import React, { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 

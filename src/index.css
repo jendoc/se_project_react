@@ -2,16 +2,16 @@
 
 @import url(./vendor/CabinetGrotesk/cabinet-grotesk.css);
 
-@import url(./blocks/App/App.css);
+@import url(./components/App/App.css);
 
-@import url(./blocks/Header/Header.css);
+@import url(./components/Header/Header.css);
 
-@import url(./blocks/Main/Main.css);
+@import url(./components/Main/Main.css);
 
-@import url(./blocks/WeatherCard/WeatherCard.css);
+@import url(./components/WeatherCard/WeatherCard.css);
 
-@import url(./blocks/ItemCard/ItemCard.css);
+@import url(./components/ItemCard/ItemCard.css);
 
-@import url(./blocks/ModalWithForm/ModalWithForm.css);
+@import url(./components/ModalWithForm/ModalWithForm.css);
 
-@import url(./blocks/ItemModal/ItemModal.css);
+@import url(./components/ItemModal/ItemModal.css);

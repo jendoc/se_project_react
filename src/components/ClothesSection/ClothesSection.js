@@ -1,4 +1,4 @@
-import "../../blocks/ClothesSection/ClothesSection.css";
+import "./ClothesSection.css";
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 

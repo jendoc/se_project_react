@@ -1,4 +1,4 @@
-import "../../blocks/Profile/Profile.css";
+import "./Profile.css";
 import React from "react";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";

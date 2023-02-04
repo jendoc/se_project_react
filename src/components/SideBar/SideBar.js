@@ -1,4 +1,4 @@
-import "../../blocks/SideBar/SideBar.css";
+import "./SideBar.css";
 import React from "react";
 import iconPath from "../../images/Avatar.svg";
 

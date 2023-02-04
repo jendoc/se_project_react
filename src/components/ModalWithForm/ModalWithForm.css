@@ -127,3 +127,8 @@
 .modal__form-submit-btn:hover {
   cursor: default;
 }
+
+.modal__form-btn_alt {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+}

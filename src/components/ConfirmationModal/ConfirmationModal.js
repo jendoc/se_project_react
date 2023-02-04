@@ -1,13 +1,13 @@
 import React from "react";
-import "../../blocks/ConfirmationModal/ConfirmationModal.css";
+import "./ConfirmationModal.css";
 
-const ConfirmationModal = ({ isOpen, name, onCloseModal, onCardDelete }) => {
+const ConfirmationModal = ({ isOpen, type, onCloseModal, onCardDelete }) => {
   return (
     <div
       className={
         isOpen
-          ? `confirm-modal modal_name_${name}`
-          : `modal_name_${name} confirm-modal_closed`
+          ? `confirm-modal modal_name_${type}`
+          : `modal_name_${type} confirm-modal_closed`
       }
     >
       <div className="confirm-modal__body">

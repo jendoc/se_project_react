@@ -1,20 +1,22 @@
-import "../../blocks/ItemModal/ItemModal.css";
+import { useContext } from "react";
+import "./ItemModal.css";
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function ItemModal({
   isOpen,
-  name,
+  type,
   card,
   onCloseModal,
-  onDeleteClick,
-  currentUser,
+  onDeleteClick
 }) {
-  // Checking if the current user is the owner of the current clothing item
+  const currentUser = useContext(CurrentUserContext);
+  //Checking if the current user is the owner of the current clothing item
   //const isOwn = card.owner._id === currentUser._id;
 
-  // Creating a variable which you'll then set in `className` for the delete button
-  //const itemDeleteButtonClassName = `item__delete-button ${
-  //  isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
-  //}`;
+  //Creating a variable which you'll then set in `className` for the delete button
+  // const itemDeleteButtonClassName = `item__delete-button ${
+  //   isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
+  // }`;
 
   //className={itemDeleteButtonClassName}
 
@@ -22,8 +24,8 @@ function ItemModal({
     <div
       className={
         isOpen
-          ? `item-modal modal_name_${name}`
-          : `modal_name_${name} item-modal_closed`
+          ? `item-modal modal_name_${type}`
+          : `modal_name_${type} item-modal_closed`
       }
     >
       <div className="item-modal__body">
