@@ -84,6 +84,11 @@
   border-bottom: #000 solid 1px;
 }
 
+.form__input_error {
+  color: #FF4D00;
+  border-bottom: #FF4D00 solid 1px;
+}
+
 .form__radio {
   margin: 8px 0px;
 }

@@ -28,6 +28,24 @@
   object-fit: cover;
 }
 
+.card__like-btn {
+  background: transparent url(../../images/like.svg) no-repeat center;
+  border: none;
+  width: 18px;
+  height: 15px;
+}
+
+.card__like-btn_liked {
+  /* TODO implement liked styles*/
+  border: none;
+  width: 18px;
+  height: 15px;
+}
+
+.card__like-btn_hidden {
+  display: none;
+}
+
 .card:hover {
   cursor: pointer;
 }

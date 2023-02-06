@@ -2,17 +2,19 @@ import { useContext } from "react";
 import "./ItemCard.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemCard({ clothingOption, onClick }) {
+function ItemCard({ clothingOption, onClick, handleLikeClick, isLoggedIn }) {
   const currentUser = useContext(CurrentUserContext);
-  // Check if the item was liked by the current user
-  //const isLiked = clothingOption.likes.some((user) => user._id === currentUser._id);
+  const isLiked = clothingOption.likes.some((like) => like === currentUser._id);
 
-  // Create a variable which you then set in `className` for the like button
-  //const itemLikeButtonClassName = `...`;
+  const itemLikeButtonClassName = isLiked ? "card__like-btn_liked" : "card__like-btn";
 
   return (
     <li className="card" onClick={onClick}>
       <h5 className="card__title">{clothingOption.name}</h5>
+      <button
+        className={isLoggedIn ? itemLikeButtonClassName : "card__like-btn_hidden"}
+        onClick={handleLikeClick}
+      ></button>
       <img
         className="card__image"
         src={clothingOption.imageUrl}

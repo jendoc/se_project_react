@@ -13,7 +13,6 @@ import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 
-import { getItems, addItem, deleteItem } from "../../utils/api";
 import { location, APIKey, baseUrl } from "../../utils/constants";
 import {
   getForecastWeather,
@@ -22,6 +21,7 @@ import {
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
+import * as api from "../../utils/api";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 const App = () => {
@@ -33,7 +33,8 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
-    avatar: ""
+    avatar: "",
+    _id: ""
   });
 
   useEffect(() => {
@@ -83,8 +84,30 @@ const App = () => {
     setActiveModal("confirm");
   };
 
+  const handleLikeClick = ({ id, isLiked, user }) => {
+    const token = localStorage.getItem("jwt");
+    isLiked
+      ? api
+          .addCardLike({ id, user }, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((card) => (card._id === id ? updatedCard : card))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike({ id, user }, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((card) => (card._id === id ? updatedCard : card))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   const handleCardDelete = () => {
-    deleteItem(selectedCard.id)
+    api
+      .deleteItem(selectedCard.id)
       .then(() => {
         setClothingItems(
           clothingItems.filter((item) => item.id !== selectedCard.id)
@@ -103,12 +126,13 @@ const App = () => {
 
   const handleToggleModal = () => {
     activeModal === "login"
-    ? setActiveModal("register")
-    : setActiveModal("login")
-  }
+      ? setActiveModal("register")
+      : setActiveModal("login");
+  };
 
   const fetchClothingItems = () => {
-    getItems()
+    api
+      .getItems()
       .then((data) => {
         setClothingItems(data);
       })
@@ -120,7 +144,8 @@ const App = () => {
   }, []);
 
   const handleAddItemSubmit = (name, imageUrl, weatherType) => {
-    addItem(name, imageUrl, weatherType)
+    api
+      .addItem(name, imageUrl, weatherType)
       .then((item) => {
         const items = [item, ...clothingItems];
         setClothingItems(items);
@@ -129,49 +154,57 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleRegistration = async (email, password, name, avatar) => {
-    return auth.register(email, password, name, avatar).then(() => {
+  const handleRegistration = (name, avatar, email, password) => {
+    auth.register(name, avatar, email, password).then((res) => {
+      console.log(res);
+      handleAuthorization(res.email, password);
       setIsLoggedIn(true);
-      setCurrentUser({ name: name, avatar: avatar });
-      console.log(currentUser)
       closeModal();
     });
   };
 
-  const handleAuthorization = async (email, password) => {
-    return auth
+  const handleAuthorization = (email, password) => {
+    auth
       .authorize(email, password)
       .then(() => {
-        closeModal();
+        handleCheckToken();
         setIsLoggedIn(true);
+        closeModal();
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
+
+  const handleCheckToken = () => {
+    auth
+      .checkToken(localStorage.getItem("jwt"))
+      .then((user) => {
+        if (user) {
+          setIsLoggedIn(true);
+          setCurrentUser(user);
+        } else {
+          setIsLoggedIn(false);
+          setCurrentUser({});
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      const jwt = localStorage.getItem("token");
-      setIsLoggedIn(true);
-      auth
-        .checkToken(baseUrl, jwt)
-        .then((res) => {
-          setCurrentUser({
-            name: res?.data?.name,
-            avatar: res?.data.avatar,
-            id: res?.data?._id,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
     }
   }, [isLoggedIn]);
 
   return (
-    <div className="App">
-      <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
@@ -193,6 +226,7 @@ const App = () => {
                 weatherData={weatherData}
                 clothingItems={clothingItems}
                 handleCardClick={handleCardClick}
+                handleLikeClick={handleLikeClick}
                 loggedIn={isLoggedIn}
               />
             </Route>
@@ -206,6 +240,7 @@ const App = () => {
                   setActiveModal("add");
                 }}
                 loggedIn={isLoggedIn}
+                handleLogOut={handleLogOut}
               />
             </ProtectedRoute>
           </Switch>
@@ -238,7 +273,6 @@ const App = () => {
             isOpen={activeModal === "login"}
             type={"login"}
             onCloseModal={closeModal}
-            isLoggedIn={setIsLoggedIn}
             handleAuthorization={handleAuthorization}
             handleToggleModal={handleToggleModal}
           />
@@ -248,7 +282,6 @@ const App = () => {
             isOpen={activeModal === "register"}
             type={"register"}
             onCloseModal={closeModal}
-            isLoggedIn={setIsLoggedIn}
             handleRegistration={handleRegistration}
             handleToggleModal={handleToggleModal}
           />
@@ -257,12 +290,11 @@ const App = () => {
             isOpen={activeModal === "update"}
             type={"update"}
             onCloseModal={closeModal}
-            isLoggedIn={setIsLoggedIn}
             currentUser={currentUser}
           />
         </CurrentTemperatureUnitContext.Provider>
-      </CurrentUserContext.Provider>
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 

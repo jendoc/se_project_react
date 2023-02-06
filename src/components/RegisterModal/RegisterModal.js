@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleModal }) => {
+const RegisterModal = ({
+  isOpen,
+  onCloseModal,
+  handleRegistration,
+  handleToggleModal,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -16,15 +21,26 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleM
     setAvatar("");
   }, [isOpen]);
 
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleAvatar = (e) => {
+    setAvatar(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(email, password, name, avatar)
-      .then(() => {
-        history.push("/profile");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    handleRegistration(email, password, name, avatar);
+    history.push("/profile");
   };
 
   return (
@@ -42,7 +58,7 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleM
         name="email"
         type="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleEmail}
         placeholder="Email"
         required
       />
@@ -52,7 +68,7 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleM
         name="password"
         type="text"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handlePassword}
         placeholder="Password"
         required
       />
@@ -62,7 +78,7 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleM
         name="name"
         type="text"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={handleName}
         placeholder="Name"
       />
       <h4 className="form__label">Avatar URL</h4>
@@ -71,11 +87,13 @@ const RegisterModal = ({ isOpen, onCloseModal, handleRegistration, handleToggleM
         name="avatar"
         type="url"
         value={avatar}
-        onChange={(e) => setAvatar(e.target.value)}
+        onChange={handleAvatar}
         placeholder="Avatar URL"
       />
-      
-      <p className="modal__form-btn_alt" onClick={handleToggleModal}>or Log in</p>
+
+      <p className="modal__form-btn_alt" onClick={handleToggleModal}>
+        or Log in
+      </p>
     </ModalWithForm>
   );
 };

@@ -7,8 +7,9 @@ function ModalWithForm({
   buttonText,
   onCloseModal,
   onSubmit,
-  children,
+  children
 }) {
+
   return (
     <div
       className={

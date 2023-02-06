@@ -12,11 +12,15 @@ export const handleServerResponse = (res) => {
   }
 };
 
-export const getItems = () => {
+export const getItems = (token) => {
   return request(`${baseUrl}/items`, {
     mode: "no-cors",
     method: "GET",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://localhost:3000",
+      authorization: `Bearer ${token}`,
+    }
   });
 };
 
@@ -26,6 +30,7 @@ export const addItem = (name, imageUrl, weather, token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://localhost:3000",
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
@@ -41,7 +46,12 @@ export const deleteItem = (id, token) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://localhost:3000",
       authorization: `Bearer ${token}`,
-    },
+    }
   });
 };
+
+export const addCardLike = (id, token) => {};
+
+export const removeCardLike = (id, token) => {};

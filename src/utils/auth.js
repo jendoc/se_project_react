@@ -13,6 +13,7 @@ const checkRes = (res) => {
 export const register = (name, avatar, email, password) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
+    mode: "no-cors",
     headers: headers,
     body: JSON.stringify({ name, avatar, email, password }),
   }).then(checkRes);
@@ -21,30 +22,19 @@ export const register = (name, avatar, email, password) => {
 export const authorize = (email, password) => {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
+    mode: "no-cors",
     headers: headers,
     body: JSON.stringify({ email, password }),
-  })
-    .then(checkRes)
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        return data;
-      }
-    });
+  }).then(checkRes);
 };
 
 export const checkToken = (token) => {
-  return fetch(`${baseUrl}/user/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://localhost:3000",
       authorization: `Bearer ${token}`,
     },
-  })
-  .then(checkRes)
-  .then((data) => {
-    return data;
-  });
+  }).then(checkRes);
 };
-
-// TODO implement API call to update userinfo
