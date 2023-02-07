@@ -157,7 +157,7 @@ const App = () => {
   const handleRegistration = (name, avatar, email, password) => {
     auth.register(name, avatar, email, password).then((res) => {
       console.log(res);
-      handleAuthorization(res.email, password);
+      handleAuthorization(res.email, res.password);
       setIsLoggedIn(true);
       closeModal();
     });

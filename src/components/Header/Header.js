@@ -20,8 +20,6 @@ const Header = ({
 
   if (!weatherData) return null;
 
-  // TODO add user avatar placeholder
-
   return (
     <header className="header">
       <div className="header__container">
