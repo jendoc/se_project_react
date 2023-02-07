@@ -5,11 +5,12 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 const LoginModal = ({
   isOpen,
   onCloseModal,
-  handleAuthorization,
+  handleLogin,
   handleToggleModal,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     setEmail("");
@@ -18,7 +19,8 @@ const LoginModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAuthorization({email, password});
+    handleLogin();
+    history.push("/profile");
   };
 
   return (

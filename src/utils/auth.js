@@ -1,40 +1,56 @@
 import { baseUrl, headers } from "./constants";
 
-const checkRes = (res) => {
+export const handleServerResponse = (res) => {
   if (res.ok) {
     return res.json();
-  } else if (res.status === 401) {
-    throw new Error("Invalid email or password");
-  } else if (res.status === 409) {
-    throw new Error("User already exists");
+  } else {
+    return Promise.reject(`Error: ${res.status}`);
   }
 };
 
+function request(url, options) {
+  return fetch(url, options).then(handleServerResponse);
+}
+
+// const checkRes = (res) => {
+//   if (res.ok) {
+//     return res.json();
+//   } else if (res.status === 401) {
+//     throw new Error("Invalid email or password");
+//   } else if (res.status === 409) {
+//     throw new Error("User already exists");
+//   }
+// };
+
 export const register = (name, avatar, email, password) => {
-  return fetch(`${baseUrl}/signup`, {
+  return request(`${baseUrl}/signup`, {
     method: "POST",
     mode: "no-cors",
     headers: headers,
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then(checkRes);
+  });
 };
 
-export const authorize = (email, password) => {
-  return fetch(`${baseUrl}/signin`, {
+export const login = (email, password) => {
+  fetch(`${baseUrl}/signin`, {
     method: "POST",
     mode: "no-cors",
     headers: headers,
     body: JSON.stringify({ email, password }),
-  }).then(checkRes);
+  })
+  .then((data) => {
+    localStorage.setItem('token', data.token)
+  })
+  .then(handleServerResponse)
 };
 
-export const checkToken = (token) => {
-  return fetch(`${baseUrl}/users/me`, {
+export const authorize = () => {
+  return request(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "https://localhost:3000",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem('token')}`,
     },
-  }).then(checkRes);
+  });
 };

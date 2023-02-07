@@ -155,19 +155,21 @@ const App = () => {
   };
 
   const handleRegistration = (name, avatar, email, password) => {
-    auth.register(name, avatar, email, password).then((res) => {
-      console.log(res);
-      handleAuthorization(res.email, res.password);
+
+    auth.register(name, avatar, email, password).then(() => {
+      handleLogin(email, password);
       setIsLoggedIn(true);
       closeModal();
     });
   };
 
-  const handleAuthorization = (email, password) => {
+  const handleLogin = (email, password) => {
     auth
-      .authorize(email, password)
-      .then(() => {
-        handleCheckToken();
+      .login(email, password)
+      .then((res) => {
+        console.log(res.token)
+        localStorage.setItem("jwt", res.token)
+        handleAuthorization();
         setIsLoggedIn(true);
         closeModal();
       })
@@ -176,15 +178,15 @@ const App = () => {
       });
   };
 
-  const handleLogOut = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
 
-  const handleCheckToken = () => {
+  const handleAuthorization = () => {
     auth
-      .checkToken(localStorage.getItem("jwt"))
+      .authorize()
       .then((user) => {
         if (user) {
           setIsLoggedIn(true);
@@ -240,7 +242,7 @@ const App = () => {
                   setActiveModal("add");
                 }}
                 loggedIn={isLoggedIn}
-                handleLogOut={handleLogOut}
+                handleLogout={handleLogout}
               />
             </ProtectedRoute>
           </Switch>
@@ -269,11 +271,10 @@ const App = () => {
           />
 
           <LoginModal
-            handleSignIn={handleAuthorization}
             isOpen={activeModal === "login"}
             type={"login"}
             onCloseModal={closeModal}
-            handleAuthorization={handleAuthorization}
+            handleLogin={handleLogin}
             handleToggleModal={handleToggleModal}
           />
 

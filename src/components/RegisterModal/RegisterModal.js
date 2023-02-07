@@ -39,7 +39,7 @@ const RegisterModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(email, password, name, avatar);
+    handleRegistration(name, avatar, email, password);
     history.push("/profile");
   };
 
