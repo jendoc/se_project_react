@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import "./App.css";
+
+// -------- Components --------
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
@@ -12,17 +13,23 @@ import ItemModal from "../ItemModal/ItemModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
+// -------- Utils --------
 
 import { location, APIKey } from "../../utils/constants";
 import {
   getForecastWeather,
   filterDataFromWeatherAPI,
 } from "../../utils/weatherApi";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { register, authorize, getUser, updateUser } from "../../utils/auth";
 import * as api from "../../utils/api";
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
+
+// -------- Contexts --------
+
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -38,9 +45,11 @@ const App = () => {
   });
 
   // ! Remove before submit
-  console.log(currentUser);
+  //console.log(currentUser);
   console.log(isLoggedIn);
   // !
+
+  // -------- Effects --------
 
   useEffect(() => {
     if (location.latitude && location.longitude) {
@@ -76,10 +85,88 @@ const App = () => {
     return () => document.removeEventListener("click", handleOverlay);
   }, []);
 
-  const closeModal = () => {
-    setActiveModal("");
+  useEffect(() => {
+    fetchClothingItems();
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const jwt = localStorage.getItem("token");
+      setIsLoggedIn(true);
+      getUser(jwt)
+        .then((data) => {
+          setCurrentUser({
+            name: data.name,
+            avatar: data.avatar,
+            id: data._id,
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [isLoggedIn]);
+
+  // -------- User Handlers --------
+
+  const handleRegistration = async (name, avatar, email, password) => {
+    return register(name, avatar, email, password).then((data) => {
+      setIsLoggedIn(true);
+      setCurrentUser({ name: data.name, avatar: data.avatar });
+      closeModal();
+    });
   };
 
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
+
+  const handleAuthorization = (email, password) => {
+    authorize(email, password)
+      .then(() => {
+        setIsLoggedIn(true);
+        closeModal();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleProfileUpdate = async ({ name, avatar, token }) => {
+    updateUser(name, avatar, token)
+      .then((data) => {
+        setCurrentUser({
+          name: data.name,
+          avatar: data.avatar,
+          id: data._id,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  // -------- Clothing Actions/Handlers --------
+
+  const fetchClothingItems = () => {
+    api
+      .getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleAddItemSubmit = (name, imageUrl, weatherType) => {
+    api
+      .addItem(name, imageUrl, weatherType)
+      .then((item) => {
+        const items = [item, ...clothingItems];
+        setClothingItems(items);
+        closeModal();
+      })
+      .catch((err) => console.log(err));
+  };
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setActiveModal("item");
@@ -123,10 +210,10 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleToggleSwitchChange = () => {
-    currentTemperatureUnit === "F"
-      ? setCurrentTemperatureUnit("C")
-      : setCurrentTemperatureUnit("F");
+  // -------- UI Actions/Handlers --------
+
+  const closeModal = () => {
+    setActiveModal("");
   };
 
   const handleToggleModal = () => {
@@ -135,84 +222,11 @@ const App = () => {
       : setActiveModal("login");
   };
 
-  const fetchClothingItems = () => {
-    api
-      .getItems()
-      .then((data) => {
-        setClothingItems(data);
-      })
-      .catch((err) => console.log(err));
+  const handleToggleSwitchChange = () => {
+    currentTemperatureUnit === "F"
+      ? setCurrentTemperatureUnit("C")
+      : setCurrentTemperatureUnit("F");
   };
-
-  useEffect(() => {
-    fetchClothingItems();
-  }, []);
-
-  const handleAddItemSubmit = (name, imageUrl, weatherType) => {
-    api
-      .addItem(name, imageUrl, weatherType)
-      .then((item) => {
-        const items = [item, ...clothingItems];
-        setClothingItems(items);
-        closeModal();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleRegistration = (name, avatar, email, password) => {
-    return register(name, avatar, email, password).then((data) => {
-      setIsLoggedIn(true);
-      setCurrentUser({ name: data.name, avatar: data.avatar });
-      closeModal();
-    });
-  };
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  };
-
-  const handleAuthorization = (email, password) => {
-    authorize(email, password)
-      .then(() => {
-        setIsLoggedIn(true);
-        closeModal();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleProfileUpdate = async ({ name, avatar, token }) => {
-    updateUser(name, avatar, token)
-      .then((res) => {
-        setCurrentUser({
-          name: res.data.name,
-          avatar: res.data.avatar,
-          id: res.data._id,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const jwt = localStorage.getItem("token");
-      setIsLoggedIn(true);
-      getUser(jwt)
-        .then((res) => {
-          setCurrentUser({
-            name: res.data.name,
-            avatar: res.data.avatar,
-            id: res.data._id,
-          });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

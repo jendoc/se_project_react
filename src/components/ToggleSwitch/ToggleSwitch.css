@@ -75,6 +75,6 @@
   right: -2px;
 }
 
-.toggle-switch__label:active .toggle-switch__button {
+.toggle-switch__label:hover .toggle-switch__button {
   width: 28px;
 }

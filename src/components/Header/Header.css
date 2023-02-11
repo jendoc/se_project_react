@@ -43,14 +43,26 @@
   height: 40px;
   width: 40px;
   grid-area: e;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .header__user-icon_placeholder {
   height: 40px;
   width: 40px;
   grid-area: e;
-  background-color: #0084ff;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 @media screen and (min-width: 707px) and (max-width: 900px) {
