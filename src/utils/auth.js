@@ -8,49 +8,55 @@ export const handleServerResponse = (res) => {
   }
 };
 
-function request(url, options) {
-  return fetch(url, options).then(handleServerResponse);
+async function request(url, options) {
+  const res = await fetch(url, options);
+  return handleServerResponse(res);
 }
-
-// const checkRes = (res) => {
-//   if (res.ok) {
-//     return res.json();
-//   } else if (res.status === 401) {
-//     throw new Error("Invalid email or password");
-//   } else if (res.status === 409) {
-//     throw new Error("User already exists");
-//   }
 // };
 
 export const register = (name, avatar, email, password) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
-    mode: "no-cors",
     headers: headers,
     body: JSON.stringify({ name, avatar, email, password }),
   });
 };
 
-export const login = (email, password) => {
-  fetch(`${baseUrl}/signin`, {
+export const authorize = (email, password) => {
+  return request(`${baseUrl}/signin`, {
     method: "POST",
-    mode: "no-cors",
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ email, password }),
-  })
-  .then((data) => {
-    localStorage.setItem('token', data.token)
-  })
-  .then(handleServerResponse)
+  }).then((data) => {
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      return data;
+    }
+  });
 };
 
-export const authorize = () => {
+export const getUser = (token) => {
   return request(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://localhost:3000",
-      authorization: `Bearer ${localStorage.getItem('token')}`,
+      authorization: `Bearer ${token}`,
     },
+  }).then((data) => {
+    return data;
+  });
+};
+
+export const updateUser = (name, avatar, token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
   });
 };

@@ -7,7 +7,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Header = ({
   weatherData,
-  loggedIn,
+  isLoggedIn,
   openAddModal,
   openLoginModal,
   openRegisterModal,
@@ -31,7 +31,7 @@ const Header = ({
         </h2>
         <ToggleSwitch />
 
-        {loggedIn ? (
+        {isLoggedIn ? (
           <button className="header__btn" type="button" onClick={openAddModal}>
             + Add clothes
           </button>
@@ -41,7 +41,7 @@ const Header = ({
           </button>
         )}
 
-        {loggedIn ? (
+        {isLoggedIn ? (
           <Link
             to={"/profile"}
             className="header__profile-link"
@@ -52,11 +52,12 @@ const Header = ({
             }}
           >
             <h2 className="header__user-name">{currentUser.name}</h2>
-            <img
+            {currentUser.avatar === '' ? (
+              <div className="header__user-icon_placeholder">{currentUser.name[0]}</div>) :             <img
               className="header__user-icon"
               src={currentUser.avatar}
               alt="User avatar"
-            />
+            />}
           </Link>
         ) : (
           <button className="header__btn" onClick={openLoginModal}>

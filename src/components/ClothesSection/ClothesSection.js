@@ -2,7 +2,7 @@ import "./ClothesSection.css";
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ clothingItems, handleCardClick, openModal }) {
+function ClothesSection({ clothingItems, handleCardClick, openAddModal }) {
   return (
     <div className="profile__clothes-section">
       <div className="profile__clothes-section-header">
@@ -10,7 +10,7 @@ function ClothesSection({ clothingItems, handleCardClick, openModal }) {
       <button
         className="profile__add-clothes-btn"
         type="button"
-        onClick={openModal}
+        onClick={openAddModal}
       >
         + Add new
       </button>

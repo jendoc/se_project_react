@@ -45,6 +45,14 @@
   grid-area: e;
 }
 
+.header__user-icon_placeholder {
+  height: 40px;
+  width: 40px;
+  grid-area: e;
+  background-color: #0084ff;
+  border-radius: 50%;
+}
+
 @media screen and (min-width: 707px) and (max-width: 900px) {
   .header__container {
     font-size: 15px;

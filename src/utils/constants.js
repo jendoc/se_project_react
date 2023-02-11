@@ -3,7 +3,7 @@ const APIKey = "d642f7f8902d23e433a4131cca346dd4";
 const baseUrl = "http://localhost:3001";
 const headers = {
   "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "https://localhost:3000"
+  "Access-Control-Allow-Origin": "http://localhost:3000"
 };
 
 export { location, APIKey, baseUrl, headers };
