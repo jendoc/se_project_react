@@ -52,12 +52,17 @@ const Header = ({
             }}
           >
             <h2 className="header__user-name">{currentUser.name}</h2>
-            {currentUser.avatar === '' ? (
-              <div className="header__user-icon_placeholder">{currentUser.name[0]}</div>) :             <img
-              className="header__user-icon"
-              src={currentUser.avatar}
-              alt="User avatar"
-            />}
+            {currentUser.avatar === "" ? (
+              <div className="header__user-icon_placeholder">
+                {currentUser.name[0]}
+              </div>
+            ) : (
+              <img
+                className="header__user-icon"
+                src={currentUser.avatar}
+                alt="User avatar"
+              />
+            )}
           </Link>
         ) : (
           <button className="header__btn" onClick={openLoginModal}>

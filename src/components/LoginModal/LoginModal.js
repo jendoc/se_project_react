@@ -6,6 +6,7 @@ const LoginModal = ({
   isOpen,
   onCloseModal,
   handleLogin,
+  handleProfileUpdate,
   handleToggleModal,
 }) => {
   const [email, setEmail] = useState("");
@@ -19,9 +20,8 @@ const LoginModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(email, password).then(() => {
-      history.push("/profile");
-    });
+    handleLogin(email, password);
+    history.push("/profile");
   };
 
   return (

@@ -46,7 +46,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
           <ItemCard
             isOpen="false"
             clothingOption={item}
-            key={item.id}
+            key={item._id}
             onClick={() => handleCardClick(item)}
           />
         ))}

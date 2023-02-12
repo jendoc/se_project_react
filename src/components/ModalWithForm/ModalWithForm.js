@@ -8,6 +8,7 @@ function ModalWithForm({
   onCloseModal,
   onSubmit,
   children,
+  isLoading
 }) {
   return (
     <div
@@ -24,12 +25,19 @@ function ModalWithForm({
         <h3 className="form__title">{title}</h3>
         <form className="modal__form" type={type} onSubmit={onSubmit}>
           {children}
+          { isLoading ?           <button
+            className="modal__form-submit-btn modal__form-submit-btn"
+            type="submit"
+          >
+          Loading...
+          </button> :
           <button
             className="modal__form-submit-btn modal__form-submit-btn"
             type="submit"
           >
-            {buttonText}
+          { buttonText }
           </button>
+}
         </form>
       </div>
     </div>

@@ -12,9 +12,8 @@ async function request(url, options) {
   const res = await fetch(url, options);
   return handleServerResponse(res);
 }
-// };
 
-export const register = (name, avatar, email, password) => {
+export const register = ({name, avatar, email, password}) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: headers,
@@ -22,10 +21,11 @@ export const register = (name, avatar, email, password) => {
   });
 };
 
-export const authorize = (email, password) => {
+export const authorize = async (email, password) => {
   return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -37,25 +37,25 @@ export const authorize = (email, password) => {
   });
 };
 
-export const getUser = (token) => {
+export const getUser = async () => {
   return request(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   }).then((data) => {
     return data;
   });
 };
-
-export const updateUser = (name, avatar, token) => {
+ 
+export const updateUser = (name, avatar) => {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
     body: JSON.stringify({ name, avatar }),
   });

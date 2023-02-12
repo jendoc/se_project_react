@@ -49,8 +49,8 @@
   height: 16px;
   width: 16px;
   z-index: 3;
-  /* filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg)
-    brightness(103%) contrast(101%); */
+   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(252deg)
+    brightness(103%) contrast(101%);
   /* With default item cards, white visibility is an issue*/
 }
 
@@ -85,6 +85,14 @@
   border: none;
   background-color: inherit;
   font-size: 20px;
+}
+
+.item-modal__delete-btn_visibile {
+  visibility: visible;
+}
+
+.item-modal__delete-btn_hidden {
+  visibility: hidden;
 }
 
 .item-modal__delete-btn:hover {

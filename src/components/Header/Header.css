@@ -21,7 +21,8 @@
 }
 
 .header__btn {
-  margin: 0px 20px;
+  margin: 0px;
+  margin-left: 20px;
   border: 0;
   background-color: transparent;
   grid-area: c;
@@ -55,14 +56,12 @@
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   color: #fff;
-  font-family: "Cabinet Grotesk";
-  font-style: normal;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
   font-weight: 700;
   font-size: 20px;
-  line-height: 25px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 @media screen and (min-width: 707px) and (max-width: 900px) {

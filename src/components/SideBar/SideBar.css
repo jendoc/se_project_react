@@ -13,7 +13,6 @@
 }
 
 .sidebar__user-icon {
-  margin-right: 16px;
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -27,20 +26,19 @@
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.5);
   color: #fff;
-  font-family: "Cabinet Grotesk";
-  font-style: normal;
+  font-family: "CabinetGrotesk-Regular", sans-serif;
   font-weight: 700;
   font-size: 20px;
-  line-height: 25px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .sidebar__user-name {
   margin: 0px;
   line-height: 25px;
   font-size: 20px;
+  margin-left: 16px;
 }
 
 .sidebar__btn {
