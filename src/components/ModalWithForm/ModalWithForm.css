@@ -73,6 +73,10 @@
   margin-bottom: 4px;
 }
 
+.form__label_error {
+  color: #FF4D00;
+}
+
 .form__label_radio {
   margin-left: 8px;
   opacity: 50%;
@@ -86,6 +90,8 @@
 
 .form__input_error {
   color: #FF4D00;
+  padding: 5px;
+  border: none;
   border-bottom: #FF4D00 solid 1px;
 }
 

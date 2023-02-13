@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { emailRegex } from "../../utils/constants";
 
 const RegisterModal = ({
   isOpen,
@@ -13,6 +14,10 @@ const RegisterModal = ({
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const history = useHistory();
+
+  const isValid = useMemo(() => {
+    return password.length >= 8 && email.length >= 1 && email.match(emailRegex);
+  }, [email, password]);
 
   useEffect(() => {
     setEmail("");
@@ -39,7 +44,7 @@ const RegisterModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(name, avatar, email, password);
+    handleRegistration({ name, avatar, email, password });
     history.push("/profile");
   };
 
@@ -51,6 +56,7 @@ const RegisterModal = ({
       buttonText="Next"
       onCloseModal={onCloseModal}
       onSubmit={handleSubmit}
+      disabled={!isValid}
     >
       <h4 className="form__label">Email*</h4>
       <input

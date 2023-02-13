@@ -15,8 +15,7 @@ function ItemCard({ clothingOption, onClick, handleLikeClick, isLoggedIn }) {
       <div className="card__info">
         <h5 className="card__title">{clothingOption.name}</h5>
         <button
-          //className={isLoggedIn ? itemLikeButtonClassName : "card__like-btn_hidden"}
-          className={itemLikeButtonClassName}
+          className={isLoggedIn ? itemLikeButtonClassName : "card__like-btn_hidden"}
           onClick={handleLikeClick}
         ></button>
       </div>

@@ -31,7 +31,7 @@ export const authorize = async (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then((data) => {
     if (data.token) {
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("jwt", data.token);
       return data;
     }
   });

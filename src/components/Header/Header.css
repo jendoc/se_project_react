@@ -35,6 +35,7 @@
 }
 
 .header__user-name {
+  margin-left: 20px;
   margin-right: 12px;
   grid-area: d;
   color: black;

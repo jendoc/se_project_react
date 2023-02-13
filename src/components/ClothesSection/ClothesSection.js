@@ -19,7 +19,7 @@ function ClothesSection({ clothingItems, handleCardClick, openAddModal }) {
         {clothingItems.map((item) => (
           <ItemCard
             clothingOption={item}
-            key={item.id}
+            key={item._id}
             onClick={() => handleCardClick(item)}
           />
         ))}
