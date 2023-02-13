@@ -67,6 +67,7 @@ function WeatherCard({ weatherData, currentTemp }) {
         <img
           className="weathercard__image"
           src={process.env.PUBLIC_URL + "/" + getWeatherIcon()}
+          alt={weatherCondition}
         />
       </div>
     </div>

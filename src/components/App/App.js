@@ -88,11 +88,7 @@ const App = () => {
       setIsLoggedIn(true);
       getUser(token)
         .then((res) => {
-          setCurrentUser({
-            name: res.data.name,
-            avatar: res.data.avatar,
-            id: res.data._id,
-          });
+          setCurrentUser(res);
         })
         .catch((e) => {
           console.log(e);
@@ -194,9 +190,9 @@ const App = () => {
   // -------- User Handlers --------
 
   const handleRegistration = ({ name, avatar, email, password }) => {
-    return register({ name, avatar, email, password }).then((data) => {
+    return register({ name, avatar, email, password }).then((res) => {
       setIsLoggedIn(true);
-      setCurrentUser({ name: data.name, avatar: data.avatar });
+      setCurrentUser(res);
       closeModal();
     });
   };

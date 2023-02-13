@@ -4,7 +4,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ItemCard({
   clothingOption,
-  onClick,
+  handleCardClick,
   handleLikeClick,
   isLoggedIn,
 }) {
@@ -16,7 +16,7 @@ function ItemCard({
   }`;
 
   return (
-    <li className="card" onClick={onClick}>
+    <li className="card">
       <div className="card__info">
         <h5 className="card__title">{clothingOption.name}</h5>
         <button
@@ -30,6 +30,7 @@ function ItemCard({
         className="card__image"
         src={clothingOption.imageUrl}
         alt={clothingOption.name}
+        onClick={handleCardClick}
       />
     </li>
   );
