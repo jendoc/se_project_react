@@ -38,17 +38,13 @@ const App = () => {
   const [activeModal, setActiveModal] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [showFormError, setShowFormError] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
-    _id: "",
+    id: "",
   });
-
-  // ! Remove before submit
-  console.log(currentUser);
-  console.log(isLoggedIn);
-  // !
 
   // -------- Effects --------
 
@@ -88,9 +84,9 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      const jwt = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
       setIsLoggedIn(true);
-      getUser(jwt)
+      getUser(token)
         .then((res) => {
           setCurrentUser({
             name: res.data.name,
@@ -150,22 +146,22 @@ const App = () => {
     setActiveModal("confirm");
   };
 
-  const handleLikeClick = ({ id, isLiked, user }) => {
-    const token = localStorage.getItem("jwt");
+  const handleLikeClick = (cardId, isLiked) => {
+    const token = localStorage.getItem("token");
     isLiked
       ? api
-          .addCardLike({ id, user }, token)
+          .removeCardLike(cardId)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((card) => (card._id === id ? updatedCard : card))
+              cards.map((card) => (card._id === cardId ? updatedCard : card))
             );
           })
           .catch((err) => console.log(err))
       : api
-          .removeCardLike({ id, user }, token)
+          .addCardLike(cardId)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((card) => (card._id === id ? updatedCard : card))
+              cards.map((card) => (card._id === cardId ? updatedCard : card))
             );
           })
           .catch((err) => console.log(err));
@@ -173,10 +169,10 @@ const App = () => {
 
   const handleCardDelete = () => {
     api
-      .deleteItem(selectedCard.id)
+      .deleteItem(selectedCard._id)
       .then(() => {
         setClothingItems(
-          clothingItems.filter((item) => item.id !== selectedCard.id)
+          clothingItems.filter((item) => item._id !== selectedCard._id)
         );
         setSelectedCard({});
         closeModal();
@@ -280,7 +276,7 @@ const App = () => {
                 clothingItems={clothingItems}
                 handleCardClick={handleCardClick}
                 handleLikeClick={handleLikeClick}
-                loggedIn={isLoggedIn}
+                isLoggedIn={isLoggedIn}
               />
             </Route>
           </Switch>
@@ -325,7 +321,7 @@ const App = () => {
             type={"register"}
             onCloseModal={closeModal}
             handleRegistration={handleRegistration}
-            handleToggleModal={handleToggleModal}            
+            handleToggleModal={handleToggleModal}
             showFormError={showFormError}
             setShowFormError={handleFormError}
           />

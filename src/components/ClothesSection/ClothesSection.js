@@ -1,8 +1,10 @@
 import "./ClothesSection.css";
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ clothingItems, handleCardClick, openAddModal }) {
+function ClothesSection({ clothingItems, handleCardClick, openAddModal, isLoggedIn }) {  
+
   return (
     <div className="profile__clothes-section">
       <div className="profile__clothes-section-header">
@@ -21,6 +23,7 @@ function ClothesSection({ clothingItems, handleCardClick, openAddModal }) {
             clothingOption={item}
             key={item._id}
             onClick={() => handleCardClick(item)}
+            isLoggedIn={isLoggedIn}
           />
         ))}
       </ul>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
@@ -11,6 +11,10 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
     setImageUrl("");
     setWeather("");
   }, [isOpen]);
+
+  const isValid = useMemo(() => {
+    return name.length >= 2 && imageUrl.length >= 1;
+  }, [name, imageUrl, weather]);
 
   const handleNameChange = (evt) => {
     setName(evt.target.value);
@@ -38,6 +42,7 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
       onCloseModal={onCloseModal}
       onSubmit={handleSumbit}
       onAddItem={onAddItem}
+      disabled={!isValid}
     >
       <h4 className="form__label">Name</h4>
       <input

@@ -18,7 +18,7 @@ export const getItems = () => {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "http://localhost:3000",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
 };
@@ -29,7 +29,7 @@ export const addItem = (name, imageUrl, weather) => {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "http://localhost:3000",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
       name,
@@ -45,27 +45,27 @@ export const deleteItem = (_id) => {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "http://localhost:3000",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
 };
 
-export const addCardLike = (id) => {
-  return request(`${baseUrl}/items/${id}/likes`, {
+export const addCardLike = (_id) => {
+  return request(`${baseUrl}/items/${_id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
 };
 
-export const removeCardLike = (id) => {
-  return request(`${baseUrl}/items/${id}/likes`, {
+export const removeCardLike = (_id) => {
+  return request(`${baseUrl}/items/${_id}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
 };

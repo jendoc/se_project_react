@@ -42,6 +42,7 @@
   height: 20px;
   z-index: 2;
   margin-left: 10px;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .card__like-btn_liked {
@@ -53,14 +54,20 @@
   height: 20px;
   z-index: 2;
   margin-left: 10px;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .card__like-btn_hidden {
   display: none;
 }
 
-.card:hover, .card__like-btn:hover {
+.card:hover {
   cursor: pointer;
+}
+
+.card__like-btn:hover, .card__like-btn_liked:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 475px) {

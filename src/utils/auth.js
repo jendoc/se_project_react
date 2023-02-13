@@ -31,7 +31,7 @@ export const authorize = async (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then((data) => {
     if (data.token) {
-      localStorage.setItem("jwt", data.token);
+      localStorage.setItem("token", data.token);
       return data;
     }
   });
@@ -42,7 +42,7 @@ export const getUser = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   }).then((data) => {
     return data;
@@ -55,7 +55,7 @@ export const updateUser = (name, avatar) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({ name, avatar }),
   });
