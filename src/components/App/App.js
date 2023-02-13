@@ -228,9 +228,9 @@ const App = () => {
     updateUser(name, avatar, token)
       .then((res) => {
         setCurrentUser({
-          name: res?.data?.name,
-          avatar: res?.data?.avatar,
-          id: res?.data?._id,
+          name: res.data.name,
+          avatar: res.data.avatar,
+          _id: res.data._id,
         });
       })
       .catch((e) => {
