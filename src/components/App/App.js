@@ -32,6 +32,8 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const App = () => {
+  // -------- States --------
+
   const [weatherData, setWeatherData] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
@@ -90,8 +92,8 @@ const App = () => {
         .then((res) => {
           setCurrentUser(res.data);
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [isLoggedIn]);
@@ -142,34 +144,20 @@ const App = () => {
     setActiveModal("confirm");
   };
 
-  const handleLike = (cardId) => {
-    api
-      .addCardLike(cardId)
-      .then((likedCard) => {
-        setClothingItems((state) =>
-          state.map((card) => (card._id === cardId ? likedCard : card))
-        );
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleDislike = (cardId) => {
-    api
-      .removeCardLike(cardId)
-      .then((likedCard) => {
-        setClothingItems((state) =>
-          state.map((card) => (card._id === cardId ? likedCard : card))
-        );
-      })
-      .catch((err) => console.log(err));
-  };
-
   const handleLikeClick = (cardId, isLiked) => {
-    if (isLiked) {
-      handleDislike(cardId);
-    } else {
-      handleLike(cardId);
-    }
+    const apiMethod = isLiked ? api.removeCardLike : api.addCardLike;
+
+    apiMethod(cardId)
+      .then((updatedCard) => {
+        const updatedItems = clothingItems.map((item) => {
+          if (item._id === updatedCard._id) {
+            return updatedCard;
+          }
+          return item;
+        });
+        setClothingItems(updatedItems);
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleCardDelete = () => {
@@ -190,15 +178,14 @@ const App = () => {
     api
       .addItem(name, imageUrl, weatherType)
       .then((item) => {
-        setClothingItems([item, ...clothingItems]);
+        setClothingItems([...clothingItems, item]);
         closeModal();
       })
-      .then(() => {
-        setIsLoading(false);
-      })
       .catch((err) => {
-        setIsLoading(false);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -226,28 +213,29 @@ const App = () => {
     authorize(email, password)
       .then(() => {
         setIsLoggedIn(true);
-        setIsLoading(false);
         closeModal();
       })
       .catch((err) => {
-        setIsLoading(false);
         console.log(err);
         setShowFormError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
-  const handleProfileUpdate = async ({ name, avatar, token }) => {
+  const handleProfileUpdate = ({ name, avatar, token }) => {
     setIsLoading(true);
     updateUser(name, avatar, token)
       .then((res) => {
         setCurrentUser(res);
-      })
-      .then(() => {
-        setIsLoading(false);
+        closeModal();
       })
       .catch((err) => {
-        setIsLoading(false);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -352,7 +340,7 @@ const App = () => {
             type={"update"}
             onCloseModal={closeModal}
             currentUser={currentUser}
-            handleUserUpdate={handleProfileUpdate}
+            handleProfileUpdate={handleProfileUpdate}
             isLoading={isLoading}
           />
         </CurrentTemperatureUnitContext.Provider>

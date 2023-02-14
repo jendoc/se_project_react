@@ -13,7 +13,7 @@ async function request(url, options) {
   return handleServerResponse(res);
 }
 
-export const register = ({name, avatar, email, password}) => {
+export const register = ({ name, avatar, email, password }) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: headers,
@@ -48,14 +48,14 @@ export const getUser = async () => {
     return data;
   });
 };
- 
-export const updateUser = (name, avatar) => {
+
+export const updateUser = async (name, avatar, token) => {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      authorization: `Bearer ${localStorage.getItem("token")}`,
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
   });

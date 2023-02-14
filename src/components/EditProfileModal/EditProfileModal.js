@@ -5,7 +5,7 @@ const EditProfileModal = ({
   isOpen,
   onCloseModal,
   currentUser,
-  handleUserUpdate,
+  handleProfileUpdate,
   isLoading,
 }) => {
   useEffect(() => {
@@ -16,14 +16,17 @@ const EditProfileModal = ({
   const [avatar, setAvatar] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    handleUserUpdate({
+    handleProfileUpdate({
       name,
       avatar,
       token: localStorage.getItem("token"),
-    }).then(() => {
+    })
+    .then(() => {
       onCloseModal();
-    });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   };
 
   const handleNameInput = (e) => {
