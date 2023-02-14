@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const EditProfileModal = ({ isOpen, onCloseModal, currentUser, handleUserUpdate }) => {
+const EditProfileModal = ({
+  isOpen,
+  onCloseModal,
+  currentUser,
+  handleUserUpdate,
+  isLoading,
+}) => {
   useEffect(() => {
     setName(currentUser.name);
     setAvatar(currentUser.avatar);
@@ -15,26 +21,25 @@ const EditProfileModal = ({ isOpen, onCloseModal, currentUser, handleUserUpdate 
       name,
       avatar,
       token: localStorage.getItem("token"),
-    })
-    .then(() => {
+    }).then(() => {
       onCloseModal();
-    })
-  }
+    });
+  };
 
   const handleNameInput = (e) => {
     setName(e.target.value);
-  }
+  };
 
   const handleAvatarInput = (e) => {
     setAvatar(e.target.value);
-  }
+  };
 
   return (
     <ModalWithForm
       isOpen={isOpen}
       type="update"
       title="Change profile data"
-      buttonText="Save changes"
+      buttonText={isLoading ? "Saving..." : "Save changes"}
       onCloseModal={onCloseModal}
       onSubmit={handleSubmit}
     >

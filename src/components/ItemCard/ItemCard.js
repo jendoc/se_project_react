@@ -9,7 +9,8 @@ function ItemCard({
   isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
-  const isLiked = clothingOption.likes.some((like) => like === currentUser.id);
+  const currentUserId = currentUser._id || null;
+  const isLiked = clothingOption.likes.includes(currentUserId);
 
   const itemLikeButtonClassName = `${
     isLiked ? "card__like-btn_liked" : "card__like-btn"

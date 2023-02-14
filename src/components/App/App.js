@@ -38,12 +38,12 @@ const App = () => {
   const [activeModal, setActiveModal] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [showFormError, setShowFormError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
-    id: "",
+    _id: "",
   });
 
   // -------- Effects --------
@@ -88,7 +88,7 @@ const App = () => {
       setIsLoggedIn(true);
       getUser(token)
         .then((res) => {
-          setCurrentUser(res);
+          setCurrentUser(res.data);
         })
         .catch((e) => {
           console.log(e);
@@ -142,25 +142,34 @@ const App = () => {
     setActiveModal("confirm");
   };
 
+  const handleLike = (cardId) => {
+    api
+      .addCardLike(cardId)
+      .then((likedCard) => {
+        setClothingItems((state) =>
+          state.map((card) => (card._id === cardId ? likedCard : card))
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDislike = (cardId) => {
+    api
+      .removeCardLike(cardId)
+      .then((likedCard) => {
+        setClothingItems((state) =>
+          state.map((card) => (card._id === cardId ? likedCard : card))
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleLikeClick = (cardId, isLiked) => {
-    const token = localStorage.getItem("token");
-    isLiked
-      ? api
-          .removeCardLike(cardId)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((card) => (card._id === cardId ? updatedCard : card))
-            );
-          })
-          .catch((err) => console.log(err))
-      : api
-          .addCardLike(cardId)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((card) => (card._id === cardId ? updatedCard : card))
-            );
-          })
-          .catch((err) => console.log(err));
+    if (isLiked) {
+      handleDislike(cardId);
+    } else {
+      handleLike(cardId);
+    }
   };
 
   const handleCardDelete = () => {
@@ -177,24 +186,32 @@ const App = () => {
   };
 
   const handleAddItemSubmit = (name, imageUrl, weatherType) => {
+    setIsLoading(true);
     api
       .addItem(name, imageUrl, weatherType)
       .then((item) => {
-        const items = [item, ...clothingItems];
-        setClothingItems(items);
+        setClothingItems([item, ...clothingItems]);
         closeModal();
       })
-      .catch((err) => console.log(err));
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   };
 
   // -------- User Handlers --------
 
   const handleRegistration = ({ name, avatar, email, password }) => {
-    return register({ name, avatar, email, password }).then((res) => {
-      setIsLoggedIn(true);
-      setCurrentUser(res);
-      closeModal();
-    });
+    return register({ name, avatar, email, password })
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res);
+        closeModal();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleLogout = (e) => {
@@ -204,29 +221,33 @@ const App = () => {
   };
 
   const handleAuthorization = (email, password) => {
+    setIsLoading(true);
     setShowFormError(false);
     authorize(email, password)
       .then(() => {
         setIsLoggedIn(true);
+        setIsLoading(false);
         closeModal();
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
         setShowFormError(true);
       });
   };
 
   const handleProfileUpdate = async ({ name, avatar, token }) => {
+    setIsLoading(true);
     updateUser(name, avatar, token)
       .then((res) => {
-        setCurrentUser({
-          name: res.data.name,
-          avatar: res.data.avatar,
-          _id: res.data._id,
-        });
+        setCurrentUser(res);
       })
-      .catch((e) => {
-        console.log(e);
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
       });
   };
 
@@ -256,6 +277,7 @@ const App = () => {
                 weatherData={weatherData}
                 clothingItems={clothingItems}
                 handleCardClick={handleCardClick}
+                handleLikeClick={handleLikeClick}
                 openAddModal={() => {
                   setActiveModal("add");
                 }}
@@ -264,6 +286,7 @@ const App = () => {
                 }}
                 isLoggedIn={isLoggedIn}
                 handleLogout={handleLogout}
+                isLoading={isLoading}
               />
             </ProtectedRoute>
             <Route path={"/"}>
@@ -283,6 +306,7 @@ const App = () => {
             type={"add"}
             onAddItem={handleAddItemSubmit}
             onCloseModal={closeModal}
+            isLoading={isLoading}
           />
 
           <ItemModal
@@ -309,10 +333,10 @@ const App = () => {
             handleProfileUpdate={handleProfileUpdate}
             showFormError={showFormError}
             setShowFormError={handleFormError}
+            isLoading={isLoading}
           />
 
           <RegisterModal
-            handleSignUp={handleRegistration}
             isOpen={activeModal === "register"}
             type={"register"}
             onCloseModal={closeModal}
@@ -320,6 +344,7 @@ const App = () => {
             handleToggleModal={handleToggleModal}
             showFormError={showFormError}
             setShowFormError={handleFormError}
+            isLoading={isLoading}
           />
 
           <EditProfileModal
@@ -328,6 +353,7 @@ const App = () => {
             onCloseModal={closeModal}
             currentUser={currentUser}
             handleUserUpdate={handleProfileUpdate}
+            isLoading={isLoading}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

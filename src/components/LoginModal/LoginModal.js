@@ -10,6 +10,7 @@ const LoginModal = ({
   handleToggleModal,
   showFormError,
   setShowFormError,
+  isLoading
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +45,7 @@ const LoginModal = ({
       isOpen={isOpen}
       type="login"
       title="Log in"
-      buttonText="Log in"
+      buttonText={isLoading ? "Loading..." : "Log in"}
       onCloseModal={onCloseModal}
       onSubmit={handleSubmit}
       disabled={!isValid}

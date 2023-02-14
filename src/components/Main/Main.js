@@ -3,6 +3,7 @@ import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Main({
   weatherData,
@@ -12,6 +13,7 @@ function Main({
   isLoggedIn,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const currentTemp =
     currentTemperatureUnit === "F"
@@ -55,7 +57,14 @@ function Main({
             key={item._id}
             handleCardClick={() => handleCardClick(item)}
             isLoggedIn={isLoggedIn}
-            handleLikeClick={handleLikeClick}
+            currentUser={currentUser}
+            handleLikeClick={() => {
+              handleLikeClick(
+                item._id,
+                item.likes.includes(currentUser._id),
+                currentUser
+              );
+            }}
           />
         ))}
       </ul>

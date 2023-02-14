@@ -9,7 +9,7 @@ function ModalWithForm({
   onSubmit,
   children,
   isLoading,
-  disabled
+  disabled,
 }) {
   return (
     <div

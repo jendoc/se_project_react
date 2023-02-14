@@ -8,6 +8,7 @@ const RegisterModal = ({
   onCloseModal,
   handleRegistration,
   handleToggleModal,
+  isLoading
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +54,7 @@ const RegisterModal = ({
       isOpen={isOpen}
       type="register"
       title="Sign up"
-      buttonText="Next"
+      buttonText={isLoading ? "Loading..." : "Next"}
       onCloseModal={onCloseModal}
       onSubmit={handleSubmit}
       disabled={!isValid}
