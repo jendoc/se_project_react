@@ -15,14 +15,6 @@ Created for Practicum USA Software Engineering Bootcamp. This project is my firs
 
 Server created with Express, [Repo here](https://github.com/jendoc/se_project_express)
 
-## Getting Started
-
-### Installing
-
-* Clone the repo
-* To run the demo, run: ``` npm start ```
-* App is hosted at localhost:3000
-
 ### Built With
 
 [![React][react]][react-url]
