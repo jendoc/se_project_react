@@ -8,6 +8,9 @@ Simple weather app created with React to help users decide what to wear based on
 
 Created for Practicum USA Software Engineering Bootcamp. This project is my first experience with React. The app fetchs data from [Open Weather Map's API](https://openweathermap.org/api) according to a set latitude and longitude. This data then dynamicaly styles the app's appearance and filters uploaded clothing based on the weather.
 
+## Link to live full-stack app
+[What to Wear App](https://www.jendoc-wtwr.students.nomoredomainssbs.ru/)
+
 ## Link to back-end
 
 Server created with Express, [Repo here](https://github.com/jendoc/se_project_express)
