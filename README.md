@@ -20,6 +20,16 @@ Server created with Express, [Repo here](https://github.com/jendoc/se_project_ex
 * To run the demo, run: ``` npm start ```
 * App is hosted at localhost:3000
 
-### Built with
+### Built With
 
-[React.js](https://reactjs.org/)
+[![React][react]][react-url]
+[![React Router][react-r]][react-r-url]
+[![Jest][jest]][jest-url]
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[react]: https://img.shields.io/badge/react-000000?style=for-the-badge&logo=react&logoColor=#61dbfb
+[react-url]: https://reactjs.org/
+[react-r]: https://img.shields.io/badge/reactrouter-000000?style=for-the-badge&logo=reactrouter&logoColor=#CA4245
+[react-r-url]: https://reactrouter.com/en/main
+[jest]: https://img.shields.io/badge/jest-C21325?style=for-the-badge&logo=jest
+[jest-url]: https://jestjs.io/
