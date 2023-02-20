@@ -43,6 +43,7 @@ const RegisterModal = ({
     setAvatar(e.target.value);
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration({ name, avatar, email, password });

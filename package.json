@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -42,7 +42,9 @@
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "jest": "^29.4.3",
+    "supertest": "^6.3.3"
   },
-  "homepage": "https://jendoc.github.io/se_project_react/"
+  "homepage": "/"
 }

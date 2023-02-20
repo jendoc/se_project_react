@@ -21,12 +21,12 @@ const EditProfileModal = ({
       avatar,
       token: localStorage.getItem("token"),
     })
-    .then(() => {
-      onCloseModal();
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then(() => {
+        onCloseModal();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleNameInput = (e) => {
