@@ -11,6 +11,8 @@ Created for Practicum USA Software Engineering Bootcamp. This project is my firs
 ## Link to live full-stack app
 [What to Wear App](https://www.jendoc-wtwr.students.nomoredomainssbs.ru/)
 
+Log in to the default user with email "hello@user.com" and password "password"
+
 ## Link to back-end
 
 Server created with Express, [Repo here](https://github.com/jendoc/se_project_express)
