@@ -22,7 +22,7 @@ export const getItems = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
@@ -33,7 +33,7 @@ export const addItem = (name, imageUrl, weather) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
@@ -49,7 +49,7 @@ export const deleteItem = (_id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
