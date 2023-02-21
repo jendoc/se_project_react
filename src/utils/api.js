@@ -9,6 +9,13 @@ function request(url, options) {
   return fetch(url, options).then(handleServerResponse);
 }
 
+const allowedOrigins = [
+  "https://jendoc-wtwr.students.nomoredomainssbs.ru",
+  "http://jendoc-wtwr.students.nomoredomainssbs.ru",
+  "https://www.jendoc-wtwr.students.nomoredomainssbs.ru",
+  "http://www.jendoc-wtwr.students.nomoredomainssbs.ru",
+];
+
 export const handleServerResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -22,7 +29,7 @@ export const getItems = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
+      "Access-Control-Allow-Origin": allowedOrigins,
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
@@ -33,7 +40,7 @@ export const addItem = (name, imageUrl, weather) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
+      "Access-Control-Allow-Origin": allowedOrigins,
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
@@ -49,7 +56,7 @@ export const deleteItem = (_id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://jendoc-wtwr.students.nomoredomainssbs.ru",
+      "Access-Control-Allow-Origin": allowedOrigins,
       authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
