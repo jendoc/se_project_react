@@ -1,4 +1,8 @@
-import { baseUrl, headers } from "./constants";
+import { headers } from "./constants";
+
+const baseUrl = process.env.NODE_ENV === 'production' 
+  ? 'https://api.jendoc-wtwr.students.nomoredomainssbs.ru'
+  : 'http://localhost:3001';
 
 export const handleServerResponse = (res) => {
   if (res.ok) {

@@ -1,4 +1,9 @@
-import { baseUrl } from "./constants";
+//import { baseUrl } from "./constants";
+
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.jendoc-wtwr.students.nomoredomainssbs.ru/"
+    : "http://localhost:3001";
 
 function request(url, options) {
   return fetch(url, options).then(handleServerResponse);
