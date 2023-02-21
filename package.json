@@ -19,8 +19,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* jendocdev@jendoc-wtwr.students.nomoredomainssbs.ru:/home/jendocdev/frontend"
   },
   "eslintConfig": {
     "extends": [
