@@ -2,7 +2,7 @@
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://api.jendoc-wtwr.students.nomoredomainssbs.ru/"
+    ? "https://api.jendoc-wtwr.students.nomoredomainssbs.ru"
     : "http://localhost:3001";
 
 function request(url, options) {
