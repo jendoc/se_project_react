@@ -13,6 +13,8 @@ Created for Practicum USA Software Engineering Bootcamp. This project is my firs
 
 Log in to the default user with email "hello@user.com" and password "password"
 
+Optimized for desktop at the moment, mobile version coming soon.
+
 ## Link to back-end
 
 Server created with Express, [Repo here](https://github.com/jendoc/se_project_express)
